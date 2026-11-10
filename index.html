@@ -41,7 +41,11 @@
 .compound-p{width:100%;border-collapse:collapse;font-size:9px}.compound-p th,.compound-p td{border:1px solid #aaa;padding:6px 4px;text-align:center}.compound-p th{background:#e8eef5}
 .compound-name{text-align:left!important;font-weight:800}
 .compound-score{font-size:16px;font-weight:800}
-.compound-profile{padding:7px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.cp-one{height:275px;border:1px solid #aaa;position:relative}.cp-one .n{position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:800;font-size:10px}.cp-one .line{position:absolute;top:24px;bottom:14px;left:50%;border-left:1px solid #555}.cp-one .scale{position:absolute;left:2px;right:2px;top:28px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between;font-size:6px;color:#555}.cp-one .mark{position:absolute;left:50%;width:23px;height:16px;transform:translate(-50%,-50%);border:2px solid #1d4e89;background:#fff;text-align:center;font-size:8px;font-weight:800;line-height:12px}
+.compound-profile{padding:7px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.cp-one{height:275px;border:1px solid #aaa;position:relative}.cp-one .n{position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:800;font-size:10px}.cp-one .line{position:absolute;top:24px;bottom:14px;left:50%;border-left:1px solid #555}.cp-one .scale{position:absolute;left:2px;right:2px;top:28px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between;font-size:6px;color:#555}
+/* Estilos visuales añadidos para la línea roja de media y banda de referencia */
+.cp-one .mean-band{position:absolute;left:0;right:0;top:103px;height:46px;background:rgba(220,53,69,0.07);pointer-events:none}
+.cp-one .mean-line{position:absolute;left:0;right:0;top:126px;border-top:1.5px dashed rgba(220,53,69,0.75);pointer-events:none}
+.cp-one .mark{position:absolute;left:50%;width:23px;height:16px;transform:translate(-50%,-50%);border:2px solid #1d4e89;background:#fff;text-align:center;font-size:8px;font-weight:800;line-height:12px;z-index:2}
 .protocol-footer{font-size:8px;color:#555;padding:8px;border-top:1px solid #aaa;line-height:1.35}
 </style></head>
 <body>
@@ -325,9 +329,12 @@ function protocoloCompoundProfile(){
     const x=currentIndexResults[n];
     const score=x?Number(x.score):null;
     const top=score?Math.max(0,Math.min(100,(160-score)/120*100)):50;
+    // Se incluye la banda de media poblacional (90-110) y la línea roja horizontal en 100 de forma puramente visual
     html+=`<div class="cp-one"><div class="n">${n}</div>
       <div class="scale"><span>160</span><span>130</span><span>100</span><span>70</span><span>40</span></div>
       <div class="line"></div>
+      <div class="mean-band"></div>
+      <div class="mean-line"></div>
       <div class="mark" style="top:${28+(top/100)*233}px">${score??'—'}</div></div>`;
   });
   return html+'</div>';
