@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>WAIS-IV · Automatización y Protocolo Digital</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f6f8;color:#18212b;font-family:Arial,sans-serif}
+    header{background:#17232e;color:#fff;padding:20px 18px;font-size:20px;font-weight:700}
+    main{max-width:1250px;margin:auto;padding:16px}
+    .card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px #00000012}
+    h2{margin:0 0 16px;font-size:24px}
+    .note{background:#fff4cf;padding:13px;border-radius:12px;line-height:1.45;margin-bottom:14px}
+    .ok{background:#eef8ee;border:1px solid #b7d7b7;color:#255c2b;padding:12px;border-radius:10px}
+    .error{background:#fff0f0;border:1px solid #e4aaaa;color:#8a2222;padding:12px;border-radius:10px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .datebox{display:flex;gap:5px;align-items:center}
+    .datebox input{text-align:center;padding:12px 5px}
+    .dd,.mm{width:62px!important}
+    .yyyy{width:105px!important}
+    .sep{font-size:22px;color:#65717c}
+    .datehelp{font-size:12px;color:#68737d;margin-top:5px}
+    .age{margin-top:14px}
+    .subgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .sub{border:1px solid #e1e5e8;border-radius:12px;padding:11px}
+    .sub b{display:block;margin-bottom:7px;font-size:14px}
+    .sub input{width:100%;padding:12px;border:1px solid #cbd2d8;border-radius:9px;font-size:17px}
+    input{font-size:17px}
+    .btn{border:0;border-radius:10px;padding:12px 18px;font-size:16px;cursor:pointer;margin:4px}
+    .primary{background:#17232e;color:#fff}
+    .secondary{background:#eef1f3;color:#18212b}
+    .disabled{opacity:.45}
+    .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .box{border:1px solid #e2e5e8;border-radius:12px;padding:14px}
+    .box h3{margin:0 0 10px;font-size:17px}
+    .big{font-size:30px;font-weight:700}
+    .muted{color:#66717c}
+    .warn{background:#fff7e8;border:1px solid #efd39a;padding:11px;border-radius:10px;color:#704d00}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{padding:9px;border-bottom:1px solid #e5e7e9;text-align:left}
+    th{background:#f6f7f8}
+    .status{font-weight:700}
+    .report-tools{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+    .report{border:1px solid #dfe4e8;border-radius:14px;padding:16px;background:#fbfcfd}
+    .report h3{margin:16px 0 8px}
+    .report h3:first-child{margin-top:0}
+    .report p{line-height:1.55;margin:8px 0}
+    .report ul{line-height:1.55}
+    .editable{width:100%;min-height:130px;border:1px solid #cbd2d8;border-radius:10px;padding:12px;font:15px Arial,sans-serif;resize:vertical}
+    .qual-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .qual-box{border:1px solid #e1e5e8;border-radius:12px;padding:13px}
+    .qual-box h4{margin:0 0 7px}
+    .tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef1f3;font-size:12px;font-weight:700;margin-bottom:7px}
+    .small{font-size:12px;color:#66717c}
+    
+    .protocol-card{padding:12px!important}
+    .oculto,.hidden{display:none!important}
+    .protocol-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .protocol-sheet{background:#fff;border:1px solid #222;max-width:1100px;margin:0 auto;color:#111;font-family:Arial,sans-serif}
+    .protocol-title{border-bottom:3px solid #1d4e89;padding:12px 14px 9px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+    .protocol-title .brand{font-size:25px;font-weight:800;color:#1d4e89}
+    .protocol-title .main-title{font-size:22px;font-weight:800;color:#1d4e89}
+    .protocol-title .sub{font-size:10px;color:#4f5b66;margin-top:3px}
+    .protocol-meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #333}
+    .protocol-meta>div{padding:8px 10px;border-right:1px solid #999}
+    .protocol-meta>div:last-child{border-right:0}
+    .meta-line{font-size:12px;margin:4px 0}
+    .meta-line b{display:inline-block;min-width:145px}
+    .protocol-grid-out{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
+    .protocol-left,.protocol-right{border-right:1px solid #333}
+    .protocol-right{border-right:0}
+    .protocol-section-title{background:#1d4e89;color:#fff;font-weight:800;font-size:11px;padding:7px 8px;text-transform:uppercase}
+    .p-table{width:100%;border-collapse:collapse;font-size:9px}
+    .p-table th,.p-table td{border:1px solid #aaa;padding:5px 4px;text-align:center}
+    .p-table th{background:#e8eef5;font-weight:800}
+    .p-table td:first-child,.p-table th:first-child{text-align:left}
+    .protocol-scalar{font-weight:800;font-size:11px}
+    .p-profile{padding:7px}
+    .p-profile-head{display:grid;grid-template-columns:35px repeat(4,1fr);background:#e8eef5;font-size:8px;font-weight:800;text-align:center}
+    .p-profile-head>*{padding:4px;border-right:1px solid #aaa}
+    .p-profile-grid{display:grid;grid-template-columns:35px repeat(4,1fr);grid-auto-rows:15px}
+    .p-scale{text-align:right;padding-right:5px;font-size:7px;border-right:1px solid #aaa;line-height:15px}
+    .p-dot{position:relative;border-right:1px solid #ddd;border-bottom:1px dotted #ccc}
+    .p-dot:before{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#222;left:50%;top:5px;transform:translateX(-50%)}
+    .p-dot.marked:after{content:"";position:absolute;width:9px;height:9px;border:2px solid #1d4e89;border-radius:50%;background:#fff;left:50%;top:1px;transform:translateX(-50%)}
+    .protocol-bottom{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #333}
+    .compound-p{width:100%;border-collapse:collapse;font-size:9px}
+    .compound-p th,.compound-p td{border:1px solid #aaa;padding:6px 4px;text-align:center}
+    .compound-p th{background:#e8eef5}
+    .compound-name{text-align:left!important;font-weight:800}
+    .compound-score{font-size:16px;font-weight:800}
+    .compound-profile{padding:7px}
+    .
