@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v2.6</title>
+<title>WAIS-IV · Módulo Independiente · v2.7</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
 header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
@@ -17,18 +17,8 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 @media(min-width:500px){.btn{width:auto}}
 .primary{background:#1d6fa5;color:#fff}.secondary{background:#e3f2fd;color:#0d47a1}.test-btn{background:#ff9800;color:#fff;font-size:13px;padding:8px 12px}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:768px){.result-grid{grid-template-columns:1fr 1fr}}
-.box{border:1px solid #b9d9f2;border-radius:10px;padding:12px;background:#f7fbff}.box h3{margin:0 0 8px;font-size:16px;color:#1d6fa5}.big{font-size:26px;font-weight:700;color:#0d47a1}.muted{color:#546e7a;font-size:13px}.warn{background:#fffde7;border:1px solid #fff59d;padding:10px;border-radius:8px;color:#f57f17;font-size:14px}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}th,td{padding:8px;border-bottom:1px solid #e1f5fe;text-align:left}th{background:#e1f5fe;color:#0d47a1}.status{font-weight:700}
+.box{border:1px solid #b9d9f2;border-radius:10px;padding:12px;background:#f7fbff}.box h3{margin:0 0 8px;font-size:16px;color:#133b5c}.big{font-size:26px;font-weight:700;color:#0d47a1}.muted{color:#546e7a;font-size:13px}.warn{background:#fffde7;border:1px solid #fff59d;padding:10px;border-radius:8px;color:#f57f17;font-size:14px}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}th,td{padding:8px;border-bottom:1px solid #e1f5fe;text-align:left}th{background:#e1f5fe;color:#0d47a1}.status{font-weight:700}
 .editable{width:100%;min-height:120px;border:1px solid #90caf9;border-radius:8px;padding:10px;font:14px Arial,sans-serif;resize:vertical;background:#f7fbff}
-
-/* Impresión A4 limpia multicapa */
-@media print{
-  header,.card:not(#protocolCard),.protocol-actions,.btn,textarea,.book-nav-bar,.book-page-footer{display:none!important}
-  body{background:#fff;color:#000}
-  #protocolCard{display:block!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important;background:#fff!important}
-  .book-container{display:block!important}
-  .book-carousel{display:block!important;background:#fff!important;padding:0!important}
-  .book-page{display:block!important;border:0!important;box-shadow:none!important;page-break-after:always!important;break-after:page!important;height:auto!important;min-height:0!important;padding:10px 0!important;background:#fff!important}
-}
 
 .hidden{display:none!important}
 
@@ -40,7 +30,6 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:10px;font-size:11px;color:#546e7a;margin-top:10px}
 
 /* Protocolo de salida clásico adaptado */
-.protocol-sheet{background:#fff;border:1px solid #222;color:#111;font-family:Arial,sans-serif}
 .protocol-title{border-bottom:3px solid #133b5c;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 @media(min-width:600px){.protocol-title{flex-direction:row;justify-content:space-between;align-items:flex-start}}
 .protocol-title .brand{font-size:18px;font-weight:800;color:#133b5c;display:flex;align-items:center;gap:8px}
@@ -80,7 +69,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v2.6</span>
+    <span>WAIS-IV · v2.7</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -122,10 +111,10 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 
 <!-- Vista Carrusel / Librito Digital -->
 <div id="protocolCard" class="card protocol-card hidden">
-  <div class="protocol-actions" style="margin-bottom:10px">
-    <button class="btn primary" onclick="prepararImpresion()">Imprimir / Guardar PDF</button>
-    <button class="btn secondary" onclick="compartirEnlace()">Compartir Informe</button>
-    <button class="btn secondary" onclick="cerrarLibritoDigital()">Volver / Editar</button>
+  <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
+    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Descargar PDF</button>
+    <button class="btn secondary" style="flex:1" onclick="compartirInformeDirecto()">📤 Compartir Informe</button>
+    <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
@@ -169,8 +158,6 @@ function renderSubs(){
     </div>
   `).join('');
 }
-
-renderSubs();
 
 function setPart(p,d,m,y){
   const elD=document.getElementById(p+'d'), elM=document.getElementById(p+'m'), elY=document.getElementById(p+'y');
@@ -337,4 +324,22 @@ function generarTextoInformeCualitativo(){
    let maxIdx = indicesPrincipales.reduce((prev, curr) => currentIndexResults[curr].score > currentIndexResults[prev].score ? curr : prev);
    let minIdx = indicesPrincipales.reduce((prev, curr) => currentIndexResults[curr].score < currentIndexResults[prev].score ? curr : prev);
    const diff = currentIndexResults[maxIdx].score - currentIndexResults[minIdx].score;
-   const nombresLargos = {'ICV':'Índice de Comprensión Verbal (ICV)', '
+   const nombresLargos = {'ICV':'Índice de Comprensión Verbal (ICV)', 'IRP':'Índice de Razonamiento Perceptivo (IRP)', 'IMT':'Índice de Memoria de Trabajo (IMT)', 'IVP':'Índice de Velocidad de Procesamiento (IVP)'};
+   
+   if(diff >= 12){
+     analisisDiscrepancias = `Se observa una discrepancia estadísticamente significativa y descriptiva amplia entre los dominios principales, destacando un mayor rendimiento relativo en ${nombresLargos[maxIdx]} (${currentIndexResults[maxIdx].score}) y un desempeño significativamente más descendido en ${nombresLargos[minIdx]} (${currentIndexResults[minIdx].score}). Dicha heterogeneidad intraindividual indica que el Cociente Intelectual Total (CIT) debe interpretarse con cautela.`;
+   } else {
+     analisisDiscrepancias = `El perfil cognitivo evaluado se muestra armónico y homogéneo a través de los diferentes dominios principales.`;
+   }
+ }
+
+ let resumenCit = cit ? `El funcionamiento intelectual global estimado mediante el Cociente Intelectual Total (CIT) se sitúa en el rango ${nivelCompuesto(cit.score).toLowerCase()}, con un puntaje compuesto de ${cit.score} (percentil ${cit.percentile}, IC 90%: ${cit.ci90}). ` : '';
+ 
+ return `
+   <h3 style="margin-top:0;font-size:14px;color:#133b5c">Síntesis interpretativa integrada</h3>
+   <p style="font-size:11px;line-height:1.4">Protocolo administrado a <b>${escapeHtml(nombre)}</b>${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}. ${resumenCit}${analisisDiscrepancias}</p>
+   <div class="qual-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin:8px 0">${qualHtml}</div>
+   ${obs ? `<h3 style="font-size:13px;margin:8px 0 3px;color:#133b5c">Observaciones clínicas</h3><p style="font-size:11px;margin:0">${escapeHtml(obs)}</p>` : ''}
+ `;
+}
+
