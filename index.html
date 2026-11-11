@@ -2,13 +2,22 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v2.2 Completo</title>
+<title>WAIS-IV · Módulo Independiente · v2.5 Móvil</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
-header{background:#133b5c;color:#fff;padding:16px 18px;font-size:20px;font-weight:700;display:flex;align-items:center;gap:14px}
-.app-icon{width:40px;height:40px;background:linear-gradient(135deg, #1d6fa5, #0d47a1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 2px 6px #00000020;border:1px solid #90caf9}
-main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px #00000012}h2{margin:0 0 16px;font-size:24px;color:#133b5c}.note{background:#e3f2fd;border:1px solid #bbdefb;padding:13px;border-radius:12px;line-height:1.45;margin-bottom:14px;color:#0d47a1}.ok{background:#eef8ee;border:1px solid #b7d7b7;color:#255c2b;padding:12px;border-radius:10px}.error{background:#fff0f0;border:1px solid #e4aaaa;color:#8a2222;padding:12px;border-radius:10px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.datebox{display:flex;gap:5px;align-items:center}.datebox input{text-align:center;padding:12px 5px}.dd,.mm{width:62px!important}.yyyy{width:105px!important}.sep{font-size:22px;color:#65717c}.datehelp{font-size:12px;color:#68737d;margin-top:5px}.age{margin-top:14px}.subgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.sub{border:1px solid #b9d9f2;border-radius:12px;padding:11px;background:#f7fbff}.sub b{display:block;margin-bottom:7px;font-size:14px;color:#1d6fa5}.sub input{width:100%;padding:12px;border:1px solid #90caf9;border-radius:9px;font-size:17px;background:#fff}input{font-size:17px}.btn{border:0;border-radius:10px;padding:12px 18px;font-size:16px;cursor:pointer;margin:4px;font-weight:700}.primary{background:#1d6fa5;color:#fff}.secondary{background:#e3f2fd;color:#0d47a1}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid #b9d9f2;border-radius:12px;padding:14px;background:#f7fbff}.box h3{margin:0 0 10px;font-size:17px;color:#1d6fa5}.big{font-size:30px;font-weight:700;color:#0d47a1}.muted{color:#546e7a}.warn{background:#fffde7;border:1px solid #fff59d;padding:11px;border-radius:10px;color:#f57f17}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{padding:9px;border-bottom:1px solid #e1f5fe;text-align:left}th{background:#e1f5fe;color:#0d47a1}.status{font-weight:700}
-.editable{width:100%;min-height:130px;border:1px solid #90caf9;border-radius:10px;padding:12px;font:15px Arial,sans-serif;resize:vertical;background:#f7fbff}
+header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px}
+.app-icon{width:36px;height:36px;background:linear-gradient(135deg, #1d6fa5, #0d47a1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 2px 6px #00000020;border:1px solid #90caf9;flex-shrink:0}
+main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:14px;box-shadow:0 2px 10px #00000010;overflow-x:hidden}h2{margin:0 0 14px;font-size:20px;color:#133b5c}.note{background:#e3f2fd;border:1px solid #bbdefb;padding:12px;border-radius:10px;line-height:1.4;margin-bottom:12px;color:#0d47a1;font-size:14px}.ok{background:#eef8ee;border:1px solid #b7d7b7;color:#255c2b;padding:10px;border-radius:8px;font-size:14px}.error{background:#fff0f0;border:1px solid #e4aaaa;color:#8a2222;padding:10px;border-radius:8px;font-size:14px}.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
+.datebox{display:flex;gap:4px;align-items:center}.datebox input{text-align:center;padding:10px 4px}.dd,.mm{width:54px!important}.yyyy{width:90px!important}.sep{font-size:20px;color:#65717c}.datehelp{font-size:11px;color:#68737d;margin-top:4px}.age{margin-top:12px}
+.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:768px){.subgrid{grid-template-columns:repeat(5,1fr)}}
+.sub{border:1px solid #b9d9f2;border-radius:10px;padding:10px;background:#f7fbff}.sub b{display:block;margin-bottom:6px;font-size:13px;color:#1d6fa5}.sub input{width:100%;padding:10px;border:1px solid #90caf9;border-radius:8px;font-size:16px;background:#fff}input{font-size:16px}.btn{border:0;border-radius:8px;padding:12px 16px;font-size:15px;cursor:pointer;margin:4px 4px 4px 0;font-weight:700;width:100%}
+@media(min-width:500px){.btn{width:auto}}
+.primary{background:#1d6fa5;color:#fff}.secondary{background:#e3f2fd;color:#0d47a1}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:768px){.result-grid{grid-template-columns:1fr 1fr}}
+.box{border:1px solid #b9d9f2;border-radius:10px;padding:12px;background:#f7fbff}.box h3{margin:0 0 8px;font-size:16px;color:#1d6fa5}.big{font-size:26px;font-weight:700;color:#0d47a1}.muted{color:#546e7a;font-size:13px}.warn{background:#fffde7;border:1px solid #fff59d;padding:10px;border-radius:8px;color:#f57f17;font-size:14px}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}th,td{padding:8px;border-bottom:1px solid #e1f5fe;text-align:left}th{background:#e1f5fe;color:#0d47a1}.status{font-weight:700}
+.editable{width:100%;min-height:120px;border:1px solid #90caf9;border-radius:8px;padding:10px;font:14px Arial,sans-serif;resize:vertical;background:#f7fbff}
 
 /* Impresión A4 limpia multicapa */
 @media print{
@@ -22,50 +31,54 @@ main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radi
 
 .hidden{display:none!important}
 
-/* Librito / Carrusel Horizontal Digital con matices celestes */
+/* Librito / Carrusel Horizontal Digital optimizado */
 .book-container{margin-top:10px}
-.book-nav-bar{display:flex;justify-content:space-between;align-items:center;background:#133b5c;color:#fff;padding:12px 18px;border-radius:12px 12px 0 0;font-weight:700}
-.book-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;padding:16px;background:#e3f2fd;border-radius:0 0 12px 12px;scroll-behavior:smooth}
-.book-page{flex:0 0 100%;scroll-snap-align:start;background:#fff;border:1px solid #90caf9;border-radius:12px;padding:20px;box-shadow:0 4px 15px #1d6fa515;min-height:580px;display:flex;flex-direction:column;justify-content:space-between}
-.book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:12px;font-size:12px;color:#546e7a;margin-top:14px}
+.book-nav-bar{display:flex;justify-content:space-between;align-items:center;background:#133b5c;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;font-size:14px}
+.book-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:12px;background:#e3f2fd;border-radius:0 0 10px 10px;scroll-behavior:smooth}
+.book-page{flex:0 0 100%;scroll-snap-align:start;background:#fff;border:1px solid #90caf9;border-radius:10px;padding:14px;box-shadow:0 4px 12px #1d6fa515;min-height:520px;display:flex;flex-direction:column;justify-content:space-between}
+.book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:10px;font-size:11px;color:#546e7a;margin-top:10px}
 
-/* Protocolo de salida clásico */
+/* Protocolo de salida clásico adaptado */
 .protocol-sheet{background:#fff;border:1px solid #222;color:#111;font-family:Arial,sans-serif}
-.protocol-title{border-bottom:3px solid #133b5c;padding:12px 14px 9px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
-.protocol-title .brand{font-size:22px;font-weight:800;color:#133b5c;display:flex;align-items:center;gap:8px}
-.protocol-title .main-title{font-size:19px;font-weight:800;color:#133b5c}
-.protocol-title .sub{font-size:10px;color:#546e7a;margin-top:3px}
-.protocol-meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #90caf9;background:#f7fbff}
-.protocol-meta>div{padding:8px 10px;border-right:1px solid #bbdefb}
-.protocol-meta>div:last-child{border-right:0}
-.meta-line{font-size:12px;margin:4px 0}.meta-line b{display:inline-block;min-width:130px;color:#133b5c}
-.protocol-grid-out{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
-.protocol-left,.protocol-right{border-right:1px solid #90caf9}.protocol-right{border-right:0}
-.protocol-section-title{background:#1d6fa5;color:#fff;font-weight:800;font-size:11px;padding:7px 8px;text-transform:uppercase;letter-spacing:.5px}
-.p-table{width:100%;border-collapse:collapse;font-size:9px}
-.p-table th,.p-table td{border:1px solid #bbdefb;padding:5px 4px;text-align:center}
+.protocol-title{border-bottom:3px solid #133b5c;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+@media(min-width:600px){.protocol-title{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+.protocol-title .brand{font-size:18px;font-weight:800;color:#133b5c;display:flex;align-items:center;gap:8px}
+.protocol-title .main-title{font-size:16px;font-weight:800;color:#133b5c}
+.protocol-title .sub{font-size:10px;color:#546e7a;margin-top:2px}
+.protocol-meta{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid #90caf9;background:#f7fbff}
+@media(min-width:600px){.protocol-meta{grid-template-columns:1fr 1fr}}
+.protocol-meta>div{padding:8px 10px;border-bottom:1px solid #bbdefb}
+@media(min-width:600px){.protocol-meta>div{border-bottom:0;border-right:1px solid #bbdefb}}
+.protocol-meta>div:last-child{border-right:0;border-bottom:0}
+.meta-line{font-size:11px;margin:3px 0}.meta-line b{display:inline-block;min-width:110px;color:#133b5c}
+.protocol-grid-out{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:768px){.protocol-grid-out{grid-template-columns:1.05fr .95fr;gap:0}}
+.protocol-left,.protocol-right{border-right:0}
+@media(min-width:768px){.protocol-left{border-right:1px solid #90caf9}}
+.protocol-section-title{background:#1d6fa5;color:#fff;font-weight:800;font-size:10px;padding:6px 8px;text-transform:uppercase;letter-spacing:.5px}
+.p-table{width:100%;border-collapse:collapse;font-size:8px}
+.p-table th,.p-table td{border:1px solid #bbdefb;padding:4px 3px;text-align:center}
 .p-table th{background:#e3f2fd;font-weight:800;color:#0d47a1}
 .p-table td:first-child,.p-table th:first-child{text-align:left}
-.protocol-scalar{font-weight:800;font-size:11px;color:#0d47a1}
-.p-profile{padding:7px}.p-profile-head{display:grid;grid-template-columns:35px repeat(4,1fr);background:#e3f2fd;font-size:8px;font-weight:800;text-align:center;color:#0d47a1}
-.p-profile-head>*{padding:4px;border-right:1px solid #bbdefb}
-.p-profile-grid{display:grid;grid-template-columns:35px repeat(4,1fr);grid-auto-rows:14px}
-.p-scale{text-align:right;padding-right:5px;font-size:7px;border-right:1px solid #bbdefb;line-height:14px;color:#546e7a}
+.protocol-scalar{font-weight:800;font-size:10px;color:#0d47a1}
+.p-profile{padding:6px}.p-profile-head{display:grid;grid-template-columns:30px repeat(4,1fr);background:#e3f2fd;font-size:7px;font-weight:800;text-align:center;color:#0d47a1}
+.p-profile-head>*{padding:3px;border-right:1px solid #bbdefb}
+.p-profile-grid{display:grid;grid-template-columns:30px repeat(4,1fr);grid-auto-rows:13px}
+.p-scale{text-align:right;padding-right:4px;font-size:6px;border-right:1px solid #bbdefb;line-height:13px;color:#546e7a}
 .p-dot{position:relative;border-right:1px solid #e1f5fe;border-bottom:1px dotted #bbdefb}
-.p-dot:before{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#90caf9;left:50%;top:5px;transform:translateX(-50%)}
-.p-dot.marked:after{content:"";position:absolute;width:9px;height:9px;border:2px solid #1d6fa5;border-radius:50%;background:#e3f2fd;left:50%;top:1px;transform:translateX(-50%)}
-.protocol-bottom{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #90caf9}
-.compound-p{width:100%;border-collapse:collapse;font-size:9px}.compound-p th,.compound-p td{border:1px solid #bbdefb;padding:6px 4px;text-align:center}.compound-p th{background:#e3f2fd;color:#0d47a1}
+.p-dot:before{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#90caf9;left:50%;top:5px;transform:translateX(-50%)}
+.p-dot.marked:after{content:"";position:absolute;width:8px;height:8px;border:2px solid #1d6fa5;border-radius:50%;background:#e3f2fd;left:50%;top:2px;transform:translateX(-50%)}
+.compound-p{width:100%;border-collapse:collapse;font-size:8px}.compound-p th,.compound-p td{border:1px solid #bbdefb;padding:5px 3px;text-align:center}.compound-p th{background:#e3f2fd;color:#0d47a1}
 .compound-name{text-align:left!important;font-weight:800}
-.compound-score{font-size:15px;font-weight:800;color:#0d47a1}
-.compound-profile{padding:7px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.cp-one{height:250px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:8px}.cp-one .n{position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:800;font-size:9px;color:#133b5c}.cp-one .line{position:absolute;top:24px;bottom:14px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:28px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between;font-size:6px;color:#546e7a}
-.cp-one .mark{position:absolute;left:50%;width:21px;height:15px;transform:translate(-50%,-50%);border:2px solid #1d6fa5;background:#e3f2fd;text-align:center;font-size:8px;font-weight:800;line-height:11px;z-index:3;color:#0d47a1;border-radius:4px}
+.compound-score{font-size:13px;font-weight:800;color:#0d47a1}
+.compound-profile{padding:6px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.cp-one{height:220px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:6px}.cp-one .n{position:absolute;top:3px;left:0;right:0;text-align:center;font-weight:800;font-size:8px;color:#133b5c}.cp-one .line{position:absolute;top:22px;bottom:12px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:26px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:5px;color:#546e7a}
+.cp-one .mark{position:absolute;left:50%;width:18px;height:13px;transform:translate(-50%,-50%);border:2px solid #1d6fa5;background:#e3f2fd;text-align:center;font-size:7px;font-weight:800;line-height:9px;z-index:3;color:#0d47a1;border-radius:3px}
 </style>
 </head>
 <body>
 <header>
   <div class="app-icon">IV</div>
-  <span>WAIS-IV · Módulo Independiente · v2.2</span>
+  <span>WAIS-IV · Módulo Independiente · v2.5</span>
 </header>
 <main>
 <div id="formCardsContainer">
@@ -84,7 +97,7 @@ main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radi
   <div class="card">
     <h2>2. Puntajes naturales</h2>
     <div class="subgrid" id="subs"></div>
-    <div style="margin-top:14px">
+    <div style="margin-top:12px">
       <button class="btn primary" onclick="calcular()">Calcular escalares</button>
       <button class="btn secondary" onclick="limpiar()">Limpiar</button>
     </div>
@@ -94,9 +107,9 @@ main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radi
   <div class="card"><h2>4. Índices y puntuaciones compuestas</h2><div id="indexResult"><div class="warn">Las sumas aparecerán cuando estén disponibles las escalares necesarias.</div></div></div>
   
   <div class="card"><h2>5. Informe cualitativo y observaciones</h2>
-    <h3 style="margin-top:0px;font-size:15px;color:#133b5c">Consideraciones clínicas y observaciones del examinador</h3>
+    <h3 style="margin-top:0px;font-size:14px;color:#133b5c">Consideraciones clínicas y observaciones del examinador</h3>
     <textarea id="observaciones" class="editable" placeholder="Registrá aquí observaciones relevantes de la evaluación."></textarea>
-    <div class="report-tools" style="margin-top:14px">
+    <div class="report-tools" style="margin-top:12px">
       <button class="btn primary" onclick="abrirLibritoDigital()">Ver Presentación Librito Digital</button>
       <button class="btn secondary" onclick="guardarJSON()">Guardar datos JSON</button>
     </div>
@@ -105,15 +118,15 @@ main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radi
 
 <!-- Vista Carrusel / Librito Digital -->
 <div id="protocolCard" class="card protocol-card hidden">
-  <div class="protocol-actions" style="margin-bottom:12px">
-    <button class="btn primary" onclick="prepararImpresion()">Imprimir / Guardar PDF (Las 3 Páginas)</button>
+  <div class="protocol-actions" style="margin-bottom:10px">
+    <button class="btn primary" onclick="prepararImpresion()">Imprimir / Guardar PDF</button>
     <button class="btn secondary" onclick="compartirEnlace()">Compartir Informe</button>
-    <button class="btn secondary" onclick="cerrarLibritoDigital()">Volver / Editar evaluación</button>
+    <button class="btn secondary" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Librito Digital WAIS-IV (Deslizá o usá las flechas)</span>
-      <span style="font-size:13px; font-weight:400">Páginas interactivas</span>
+      <span>📖 Librito Digital WAIS-IV</span>
+      <span style="font-size:12px; font-weight:400">Deslizá</span>
     </div>
     <div class="book-carousel" id="bookCarousel"></div>
   </div>
@@ -284,7 +297,7 @@ function descripcionIndice(name,score){
  };
  const tituloCompleto = nombresLargos[name] || name;
  const textoDesc = descripcionesTecnicas[name] || '';
- return `<div class="qual-box" style="border:1px solid #b9d9f2;border-radius:12px;padding:13px;background:#f7fbff"><h4>${tituloCompleto} · ${nivel} (${score})</h4><div class="tag" style="display:inline-block;padding:4px 8px;border-radius:999px;background:#e3f2fd;font-size:12px;font-weight:700;margin-bottom:7px;color:#0d47a1">Puntuación compuesta: ${score}</div><p style="font-size:12px;line-height:1.4;margin:6px 0 0;color:#333">${textoDesc}</p></div>`;
+ return `<div class="qual-box" style="border:1px solid #b9d9f2;border-radius:10px;padding:11px;background:#f7fbff"><h4>${tituloCompleto} · ${nivel} (${score})</h4><div class="tag" style="display:inline-block;padding:3px 7px;border-radius:999px;background:#e3f2fd;font-size:11px;font-weight:700;margin-bottom:6px;color:#0d47a1">Puntuación compuesta: ${score}</div><p style="font-size:11px;line-height:1.4;margin:5px 0 0;color:#333">${textoDesc}</p></div>`;
 }
 
 function generarTextoInformeCualitativo(){
@@ -315,10 +328,10 @@ function generarTextoInformeCualitativo(){
  let resumenCit = cit ? `El funcionamiento intelectual global estimado mediante el Cociente Intelectual Total (CIT) se sitúa en el rango ${nivelCompuesto(cit.score).toLowerCase()}, con un puntaje compuesto de ${cit.score} (percentil ${cit.percentile}, IC 90%: ${cit.ci90}). ` : '';
  
  return `
-   <h3 style="margin-top:0;font-size:15px;color:#133b5c">Síntesis interpretativa integrada</h3>
-   <p style="font-size:12px;line-height:1.4">Protocolo administrado a <b>${escapeHtml(nombre)}</b>${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}. ${resumenCit}${analisisDiscrepancias}</p>
-   <div class="qual-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:10px 0">${qualHtml}</div>
-   ${obs ? `<h3 style="font-size:14px;margin:10px 0 4px;color:#133b5c">Observaciones clínicas</h3><p style="font-size:12px;margin:0">${escapeHtml(obs)}</p>` : ''}
+   <h3 style="margin-top:0;font-size:14px;color:#133b5c">Síntesis interpretativa integrada</h3>
+   <p style="font-size:11px;line-height:1.4">Protocolo administrado a <b>${escapeHtml(nombre)}</b>${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}. ${resumenCit}${analisisDiscrepancias}</p>
+   <div class="qual-grid" style="display:grid;grid-template-columns:1fr;gap:10px;margin:8px 0">${qualHtml}</div>
+   ${obs ? `<h3 style="font-size:13px;margin:8px 0 3px;color:#133b5c">Observaciones clínicas</h3><p style="font-size:11px;margin:0">${escapeHtml(obs)}</p>` : ''}
  `;
 }
 
@@ -326,7 +339,7 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'2.2',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'2.5',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -395,7 +408,7 @@ function protocoloCompoundProfile(){
       <div class="line"></div>
       <div class="mean-band"></div>
       <div class="mean-line"></div>
-      <div class="mark" style="top:${22+(top/100)*205}px">${score??'—'}</div></div>`;
+      <div class="mark" style="top:${18+(top/100)*180}px">${score??'—'}</div></div>`;
   });
   return html+'</div>';
 }
@@ -433,7 +446,7 @@ function abrirLibritoDigital(){
     <div class="book-page">
       <div>
         <div class="protocol-title">
-          <div><div class="brand"><div class="app-icon" style="width:28px;height:28px;font-size:13px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 1 de 3</div></div>
+          <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 1 de 3</div></div>
           <div><div class="main-title">DATOS Y SUBPRUEBAS</div></div>
         </div>
         <div class="protocol-meta">
@@ -446,49 +459,49 @@ function abrirLibritoDigital(){
             <div class="meta-line"><b>Edad / Grupo:</b> ${edad} (${grupo})</div>
           </div>
         </div>
-        <div class="protocol-section-title" style="margin-top:10px">Desempeño en Subpruebas</div>
+        <div class="protocol-section-title" style="margin-top:8px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
       </div>
-      <div class="book-page-footer"><span>Deslizá para ver siguiente página ➔</span><span>1 / 3</span></div>
+      <div class="book-page-footer"><span>Deslizá ➔</span><span>1 / 3</span></div>
     </div>
 
     <!-- PÁGINA 2: Índices, Tabla y Gráficos -->
     <div class="book-page">
       <div>
         <div class="protocol-title">
-          <div><div class="brand"><div class="app-icon" style="width:28px;height:28px;font-size:13px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 2 de 3</div></div>
-          <div><div class="main-title">PUNTUACIONES COMPUESTAS Y GRÁFICOS</div></div>
+          <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 2 de 3</div></div>
+          <div><div class="main-title">PUNTUACIONES COMPUESTAS</div></div>
         </div>
-        <div class="protocol-grid-out" style="margin-top:10px">
+        <div class="protocol-grid-out" style="margin-top:8px">
           <div class="protocol-left">
             <div class="protocol-section-title">Índices Principales</div>
-            <table class="compound-p"><thead><tr><th>Índice</th><th>Suma</th><th>Compuesto</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
+            <table class="compound-p"><thead><tr><th>Índice</th><th>S</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
           </div>
           <div class="protocol-right">
-            <div class="protocol-section-title">Perfil Equivalente (Subpruebas)</div>
+            <div class="protocol-section-title">Perfil Equivalente</div>
             <div class="p-profile">${protocoloEquivalentProfile(sc)}</div>
           </div>
         </div>
-        <div style="margin-top:10px">
-          <div class="protocol-section-title">Perfil Compuesto (Índices)</div>
+        <div style="margin-top:8px">
+          <div class="protocol-section-title">Perfil Compuesto</div>
           <div class="compound-profile">${protocoloCompoundProfile()}</div>
         </div>
       </div>
-      <div class="book-page-footer"><span>◀ Deslizá para ver informe cualitativo ▶</span><span>2 / 3</span></div>
+      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>2 / 3</span></div>
     </div>
 
-    <!-- PÁGINA 3: Informe Cualitativo con siglas explicadas -->
+    <!-- PÁGINA 3: Informe Cualitativo -->
     <div class="book-page">
       <div>
         <div class="protocol-title">
-          <div><div class="brand"><div class="app-icon" style="width:28px;height:28px;font-size:13px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 3 de 3</div></div>
+          <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 3 de 3</div></div>
           <div><div class="main-title">INFORME CUALITATIVO</div></div>
         </div>
-        <div style="margin-top:10px">
+        <div style="margin-top:8px">
           ${generarTextoInformeCualitativo()}
         </div>
       </div>
-      <div class="book-page-footer"><span>Fin del informe digital</span><span>3 / 3</span></div>
+      <div class="book-page-footer"><span>Fin del informe</span><span>3 / 3</span></div>
     </div>
   `;
 
@@ -518,7 +531,7 @@ function compartirEnlace(){
     }).catch(() => {});
   } else {
     navigator.clipboard?.writeText(textoCompartir).then(() => {
-      alert('¡Enlace y datos del informe copiados al portapapeles! Ya podés pegarlos en WhatsApp o correo.');
+      alert('¡Enlace y datos del informe copiados al portapapeles!');
     }).catch(() => {
       prompt('Copiá el enlace para compartir:', urlActual);
     });
