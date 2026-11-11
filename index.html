@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v2.9</title>
+<title>WAIS-IV · Módulo Independiente · v3.0</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
 header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
@@ -63,13 +63,34 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .compound-score{font-size:13px;font-weight:800;color:#0d47a1}
 .compound-profile{padding:6px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.cp-one{height:220px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:6px}.cp-one .n{position:absolute;top:3px;left:0;right:0;text-align:center;font-weight:800;font-size:8px;color:#133b5c}.cp-one .line{position:absolute;top:22px;bottom:12px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:26px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:5px;color:#546e7a}
 .cp-one .mark{position:absolute;left:50%;width:18px;height:13px;transform:translate(-50%,-50%);border:2px solid #1d6fa5;background:#e3f2fd;text-align:center;font-size:7px;font-weight:800;line-height:9px;z-index:3;color:#0d47a1;border-radius:3px}
+
+/* REGLAS DE IMPRESIÓN / PDF MULTIPÁGINA */
+@media print {
+  body { background: #fff !important; }
+  header, .protocol-actions, .book-nav-bar, .book-page-footer { display: none !important; }
+  #formCardsContainer { display: none !important; }
+  #protocolCard { display: block !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+  .book-carousel { display: block !important; background: #fff !important; padding: 0 !important; }
+  .book-page {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100vh !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+  }
+}
 </style>
 </head>
 <body>
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v2.9</span>
+    <span>WAIS-IV · v3.0</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -112,14 +133,14 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <!-- Vista Carrusel / Librito Digital -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Descargar PDF</button>
-    <button class="btn secondary" style="flex:1" onclick="compartirInformeDirecto()">📤 Compartir Informe</button>
+    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar / Imprimir PDF (3 Páginas)</button>
+    <button class="btn secondary" style="flex:1" onclick="compartirInformeDirecto()">📤 Compartir Resumen</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
       <span>📖 Librito Digital WAIS-IV</span>
-      <span style="font-size:12px; font-weight:400">Deslizá</span>
+      <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
     </div>
     <div class="book-carousel" id="bookCarousel"></div>
   </div>
@@ -159,7 +180,6 @@ function renderSubs(){
   `).join('');
 }
 
-// EJECUCIÓN INMEDIATA PARA EVITAR QUE QUEDE VACÍO EN MÓVILES
 renderSubs();
 
 function setPart(p,d,m,y){
@@ -349,7 +369,7 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'2.9',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'3.0',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -541,9 +561,9 @@ function compartirInformeDirecto(){
     }).catch(() => {});
   } else {
     navigator.clipboard?.writeText(textoCompartir).then(() => {
-      alert('¡Resumen del informe copiado al portapapeles! Ya podés pegarlo directamente en WhatsApp o correo.');
+      alert('¡Resumen copiado al portapapeles!');
     }).catch(() => {
-      prompt('Copiá el texto para compartir:', textoCompartir);
+      prompt('Copiá el texto:', textoCompartir);
     });
   }
 }
