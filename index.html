@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v1.5 Completo</title>
+<title>WAIS-IV · Módulo Independiente · v1.6 Completo</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#18212b;font-family:Arial,sans-serif}header{background:#17232e;color:#fff;padding:20px 18px;font-size:20px;font-weight:700}main{max-width:1250px;margin:auto;padding:16px}.card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 2px 12px #00000012}h2{margin:0 0 16px;font-size:24px}.note{background:#fff4cf;padding:13px;border-radius:12px;line-height:1.45;margin-bottom:14px}.ok{background:#eef8ee;border:1px solid #b7d7b7;color:#255c2b;padding:12px;border-radius:10px}.error{background:#fff0f0;border:1px solid #e4aaaa;color:#8a2222;padding:12px;border-radius:10px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.datebox{display:flex;gap:5px;align-items:center}.datebox input{text-align:center;padding:12px 5px}.dd,.mm{width:62px!important}.yyyy{width:105px!important}.sep{font-size:22px;color:#65717c}.datehelp{font-size:12px;color:#68737d;margin-top:5px}.age{margin-top:14px}.subgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.sub{border:1px solid #e1e5e8;border-radius:12px;padding:11px;background:#fff}.sub b{display:block;margin-bottom:7px;font-size:14px}.sub input{width:100%;padding:12px;border:1px solid #cbd2d8;border-radius:9px;font-size:17px}input{font-size:17px}.btn{border:0;border-radius:10px;padding:12px 18px;font-size:16px;cursor:pointer;margin:4px}.primary{background:#17232e;color:#fff}.secondary{background:#eef1f3;color:#18212b}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{border:1px solid #e2e5e8;border-radius:12px;padding:14px}.box h3{margin:0 0 10px;font-size:17px}.big{font-size:30px;font-weight:700}.muted{color:#66717c}.warn{background:#fff7e8;border:1px solid #efd39a;padding:11px;border-radius:10px;color:#704d00}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{padding:9px;border-bottom:1px solid #e5e7e9;text-align:left}th{background:#f6f7f8}.status{font-weight:700}
 .report-tools{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.report{border:1px solid #dfe4e8;border-radius:14px;padding:16px;background:#fbfcfd}.report h3{margin:16px 0 8px}.report h3:first-child{margin-top:0}.report p{line-height:1.55;margin:8px 0}.editable{width:100%;min-height:130px;border:1px solid #cbd2d8;border-radius:10px;padding:12px;font:15px Arial,sans-serif;resize:vertical}.qual-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.qual-box{border:1px solid #e1e5e8;border-radius:12px;padding:13px}.qual-box h4{margin:0 0 7px}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef1f3;font-size:12px;font-weight:700;margin-bottom:7px}.small{font-size:12px;color:#66717c}
@@ -46,7 +46,7 @@
 .protocol-footer{font-size:8px;color:#555;padding:8px;border-top:1px solid #aaa;line-height:1.35}
 </style></head>
 <body>
-<header>WAIS-IV · Módulo Independiente · v1.5 Completo</header>
+<header>WAIS-IV · Módulo Independiente · v1.6 Completo</header>
 <main>
 <div class="card">
 <div class="note"><b>Módulo 1 y 2:</b> Ingreso manual de fechas (DD/MM/AAAA) y puntajes naturales habilitados.</div>
@@ -121,7 +121,6 @@ function renderSubs(){
   `).join('');
 }
 
-// Renderizado inmediato para evitar que quede vacío en dispositivos móviles
 renderSubs();
 
 function setPart(p,d,m,y){
@@ -290,7 +289,7 @@ function copiarInforme(){const el=document.getElementById('qualReport');if(el)na
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'1.5',nombre:document.getElementById('name').value,indices:currentIndexResults};
+  const obj={version:'1.6',nombre:document.getElementById('name').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download='wais-iv.json';aEl.click();
 }
@@ -384,8 +383,11 @@ function protocoloIndexRows(){
 function generarProtocolo(){
   if(!Object.keys(currentIndexResults).length){alert('Calculá los resultados primero.');return;}
   actualizarProtocolo();
-  document.getElementById('protocolCard').classList.remove('hidden');
-  document.getElementById('protocolCard'].scrollIntoView({behavior:'smooth'});
+  const card = document.getElementById('protocolCard');
+  if(card){
+    card.classList.remove('hidden');
+    card.scrollIntoView({behavior:'smooth'});
+  }
 }
 
 function actualizarProtocolo(){
@@ -421,9 +423,13 @@ function actualizarProtocolo(){
     </div>
     <div class="protocol-footer">Documento generado digitalmente por módulo independiente WAIS-IV.</div>
   </div>`;
-  document.getElementById('protocolSheet').innerHTML=html;
+  const sheet = document.getElementById('protocolSheet');
+  if(sheet) sheet.innerHTML=html;
 }
 
-function cerrarProtocolo(){document.getElementById('protocolCard').classList.add('hidden');}
+function cerrarProtocolo(){
+  const card = document.getElementById('protocolCard');
+  if(card) card.classList.add('hidden');
+}
 </script>
 </body></html>
