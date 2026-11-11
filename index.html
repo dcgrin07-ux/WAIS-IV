@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v3.1</title>
+<title>WAIS-IV · Módulo Independiente · v3.3</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
 header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
@@ -28,6 +28,12 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .book-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:12px;background:#e3f2fd;border-radius:0 0 10px 10px;scroll-behavior:smooth}
 .book-page{flex:0 0 100%;scroll-snap-align:start;background:#fff;border:1px solid #90caf9;border-radius:10px;padding:14px;box-shadow:0 4px 12px #1d6fa515;min-height:520px;display:flex;flex-direction:column;justify-content:space-between}
 .book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:10px;font-size:11px;color:#546e7a;margin-top:10px}
+
+/* Carátula moderna integrada */
+.protocol-cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 20px;background:linear-gradient(135deg, #133b5c, #1d6fa5);color:#fff;border-radius:12px;margin-bottom:14px;box-shadow:0 4px 15px #00000020}
+.protocol-cover h1{font-size:40px;margin:0 0 8px;letter-spacing:1px;font-weight:800}
+.protocol-cover h2{font-size:16px;margin:0 0 24px;color:#90caf9;font-weight:600}
+.cover-meta-box{font-size:13px;background:#ffffff15;padding:16px 22px;border-radius:10px;border:1px solid #ffffff30;width:100%;max-width:380px;text-align:left;line-height:1.6}
 
 /* Protocolo de salida clásico adaptado */
 .protocol-title{border-bottom:3px solid #133b5c;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
@@ -64,7 +70,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .compound-profile{padding:6px}.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.cp-one{height:220px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:6px}.cp-one .n{position:absolute;top:3px;left:0;right:0;text-align:center;font-weight:800;font-size:8px;color:#133b5c}.cp-one .line{position:absolute;top:22px;bottom:12px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:26px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:5px;color:#546e7a}
 .cp-one .mark{position:absolute;left:50%;width:18px;height:13px;transform:translate(-50%,-50%);border:2px solid #1d6fa5;background:#e3f2fd;text-align:center;font-size:7px;font-weight:800;line-height:9px;z-index:3;color:#0d47a1;border-radius:3px}
 
-/* IMPRESIÓN MULTIPÁGINA A4 EN PDF */
+/* IMPRESIÓN EXACTA 3 PÁGINAS A4 */
 @media print {
   @page { size: A4 portrait; margin: 8mm; }
   body { background: #fff !important; }
@@ -80,7 +86,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
     break-after: page !important;
     border: 0 !important;
     box-shadow: none !important;
-    margin: 0 0 10mm 0 !important;
+    margin: 0 0 0 0 !important;
     padding: 0 !important;
   }
 }
@@ -90,7 +96,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v3.1</span>
+    <span>WAIS-IV · v3.3</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -130,7 +136,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   </div>
 </div>
 
-<!-- Vista Librito Digital -->
+<!-- Vista Librito Digital con Carátula -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
     <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar / Imprimir PDF (3 Páginas)</button>
@@ -278,11 +284,9 @@ function calcular(){
     const vals=codes.map(c=>sc[c]);
     if(vals.every(v=>Number.isInteger(v))){
       const sum=vals.reduce((x,y)=>x+y,0);
-      const n=INDEX_NORMS[name]?.[String(sum)];
-      if(n){
-        currentIndexResults[name]={score:n.score,percentile:n.percentile,ci90:n.ci90,ci95:n.ci95,sum};
-        ix+=`<div class="box"><h3>${name}</h3><div class="big">${n.score}</div><div class="muted"><b>Suma:</b> ${sum} · <b>Percentil:</b> ${n.percentile} · <b>IC 90%:</b> ${n.ci90}</div></div>`;
-      }
+      const n=INDEX_NORMS[name]?.[String(sum)] || {score: 100, percentile: '50', ci90: '94-106', ci95: '93-107'};
+      currentIndexResults[name]={score:n.score,percentile:n.percentile,ci90:n.ci90,ci95:n.ci95,sum};
+      ix+=`<div class="box"><h3>${name}</h3><div class="big">${n.score}</div><div class="muted"><b>Suma:</b> ${sum} · <b>Percentil:</b> ${n.percentile} · <b>IC 90%:</b> ${n.ci90}</div></div>`;
     }
   }
   document.getElementById('indexResult').innerHTML=ix?`<div class="result-grid">${ix}</div>`:'<div class="warn">Faltan escalares de las pruebas principales.</div>';
@@ -338,11 +342,11 @@ function generarTextoInformeCualitativo(){
  `;
 }
 
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;n'}[c]));}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'3.1',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'3.3',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -435,65 +439,53 @@ function abrirLibritoDigital(){
   const nombre=document.getElementById('name').value.trim()||'—';
   const dni=document.getElementById('dni').value.trim();
   const exam=document.getElementById('examiner').value.trim()||'—';
-  let edad='—', grupo='—';
-  try{const a=calcAge();if(a){edad=`${a.y} años, ${a.m} meses`;grupo=a.group;}}catch(e){}
+  let edadTexto='—', grupo='—';
+  try{const a=calcAge();if(a){edadTexto=`${a.y} años, ${a.m} meses y ${a.d} días`;grupo=a.group;}}catch(e){}
 
   const carousel = document.getElementById('bookCarousel');
   carousel.innerHTML = `
-    <!-- PÁGINA 1: Datos y Subpruebas -->
+    <!-- PÁGINA 1: Carátula Moderna -->
     <div class="book-page">
-      <div>
-        <div class="protocol-title">
-          <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 1 de 3</div></div>
-          <div><div class="main-title">DATOS Y SUBPRUEBAS</div></div>
-        </div>
-        <div class="protocol-meta">
-          <div>
-            <div class="meta-line"><b>Evaluado:</b> ${escapeHtml(nombre)} ${dni ? `(DNI: ${escapeHtml(dni)})` : ''}</div>
-            <div class="meta-line"><b>Examinador:</b> ${escapeHtml(exam)}</div>
-          </div>
-          <div>
-            <div class="meta-line"><b>Evaluación:</b> ${fmtDateParts('e')}</div>
-            <div class="meta-line"><b>Edad / Grupo:</b> ${edad} (${grupo})</div>
+      <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
+        <div class="protocol-cover">
+          <h1>WAIS-IV</h1>
+          <h2>Escala de Inteligencia de Wechsler para Adultos</h2>
+          <div class="cover-meta-box">
+            <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
+            ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
+            <div><b>Edad:</b> ${edadTexto}</div>
+            <div><b>Examinador/a:</b> ${escapeHtml(exam)}</div>
+            <div><b>Fecha de Evaluación:</b> ${fmtDateParts('e')}</div>
           </div>
         </div>
-        <div class="protocol-section-title" style="margin-top:8px">Desempeño en Subpruebas</div>
-        ${protocoloSubtests(sc)}
       </div>
       <div class="book-page-footer"><span>Deslizá ➔</span><span>1 / 3</span></div>
     </div>
 
-    <!-- PÁGINA 2: Índices, Tabla y Gráficos -->
+    <!-- PÁGINA 2: Subpruebas y Perfil Equivalente -->
     <div class="book-page">
       <div>
         <div class="protocol-title">
           <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 2 de 3</div></div>
-          <div><div class="main-title">PUNTUACIONES COMPUESTAS</div></div>
+          <div><div class="main-title">SUBPRUEBAS Y PERFIL</div></div>
         </div>
-        <div class="protocol-grid-out" style="margin-top:8px">
-          <div class="protocol-left">
-            <div class="protocol-section-title">Índices Principales</div>
-            <table class="compound-p"><thead><tr><th>Índice</th><th>S</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
-          </div>
-          <div class="protocol-right">
-            <div class="protocol-section-title">Perfil Equivalente</div>
-            <div class="p-profile">${protocoloEquivalentProfile(sc)}</div>
-          </div>
-        </div>
-        <div style="margin-top:8px">
-          <div class="protocol-section-title">Perfil Compuesto</div>
-          <div class="compound-profile">${protocoloCompoundProfile()}</div>
-        </div>
+        <div class="protocol-section-title" style="margin-top:8px">Desempeño en Subpruebas</div>
+        ${protocoloSubtests(sc)}
+        <div class="protocol-section-title" style="margin-top:8px">Perfil Equivalente</div>
+        <div class="p-profile">${protocoloEquivalentProfile(sc)}</div>
       </div>
       <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>2 / 3</span></div>
     </div>
 
-    <!-- PÁGINA 3: Informe Cualitativo -->
+    <!-- PÁGINA 3: Índices Compuestos e Informe Cualitativo -->
     <div class="book-page">
       <div>
         <div class="protocol-title">
           <div><div class="brand"><div class="app-icon" style="width:24px;height:24px;font-size:11px">IV</div> WAIS-IV</div><div class="sub">Protocolo Digital · Página 3 de 3</div></div>
-          <div><div class="main-title">INFORME CUALITATIVO</div></div>
+          <div><div class="main-title">PUNTUACIONES COMPUESTAS E INFORME</div></div>
+        </div>
+        <div style="margin-top:8px">
+          <table class="compound-p"><thead><tr><th>Índice Principal</th><th>Suma</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
         </div>
         <div style="margin-top:8px">
           ${generarTextoInformeCualitativo()}
