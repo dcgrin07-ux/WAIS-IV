@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v4.2</title>
+<title>WAIS-IV · Módulo Independiente · v4.3</title>
+<!-- Librería externa html2canvas para convertir las páginas en imágenes reales -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
 header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
@@ -86,7 +88,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v4.2</span>
+    <span>WAIS-IV · v4.3</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -129,8 +131,8 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <!-- Vista Librito Digital con 4 Páginas -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 1. Guardar PDF (4 Pág.)</button>
-    <button class="btn secondary" style="flex:1" onclick="compartirPDFWhatsApp()">📤 2. Enviar por WhatsApp</button>
+    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar PDF Clásico</button>
+    <button class="btn primary" style="flex:1; background:#25d366" onclick="compartirTarjetasWhatsApp()">📤 Enviar 4 Páginas a WhatsApp</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
@@ -265,7 +267,7 @@ function calcular(){
     rows.push(`<tr><td>${c}</td><td>${n}</td><td>${raw}</td><td>${scalar??'<span class="error">Fuera de rango</span>'}</td></tr>`);
   }
 
-  let html=`<div class="ok"><span class="status">A.1 validada:</span> grupo ${a.group}.</div><table><thead><tr><th>Código</th><th>Subprueba</th><th>Puntaje natural</th><th>Puntuación escalar</th></tr></thead><tbody>${rows.join('')}</tbody></table>`;
+  let html=`<div class="ok"><span class="status">A.1 validada:</span> group ${a.group}.</div><table><thead><tr><th>Código</th><th>Subprueba</th><th>Puntaje natural</th><th>Puntuación escalar</th></tr></thead><tbody>${rows.join('')}</tbody></table>`;
   document.getElementById('scalarResult').innerHTML=html;
 
   currentIndexResults={}; 
@@ -336,7 +338,7 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.2',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.3',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -435,7 +437,7 @@ function abrirLibritoDigital(){
   const carousel = document.getElementById('bookCarousel');
   carousel.innerHTML = `
     <!-- PÁGINA 1: Carátula Moderna -->
-    <div class="book-page">
+    <div class="book-page book-page-item">
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
@@ -453,7 +455,7 @@ function abrirLibritoDigital(){
     </div>
 
     <!-- PÁGINA 2: Datos Brutos convertidos a Naturales/Escalares -->
-    <div class="book-page">
+    <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
           <div class="brand"><div class="app-icon" style="width:22px;height:22px;font-size:10px">IV</div> WAIS-IV</div>
@@ -466,7 +468,7 @@ function abrirLibritoDigital(){
     </div>
 
     <!-- PÁGINA 3: Índices obtenidos y los Dos Gráficos -->
-    <div class="book-page">
+    <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
           <div class="brand"><div class="app-icon" style="width:22px;height:22px;font-size:10px">IV</div> WAIS-IV</div>
@@ -482,7 +484,7 @@ function abrirLibritoDigital(){
     </div>
 
     <!-- PÁGINA 4: Análisis Cualitativo e Informe del Psicopedagogo -->
-    <div class="book-page">
+    <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
           <div class="brand"><div class="app-icon" style="width:22px;height:22px;font-size:10px">IV</div> WAIS-IV</div>
@@ -507,26 +509,40 @@ function descargarInformePDF(){
   window.print();
 }
 
-async function compartirPDFWhatsApp(){
-  const nombre = document.getElementById('name').value.trim() || 'Paciente';
-  const dni = document.getElementById('dni').value.trim();
+async function compartirTarjetasWhatsApp(){
+  const pages = document.querySelectorAll('.book-page-item');
+  if(!pages.length){ alert('Abrí primero el librito digital.'); return; }
   
-  // Genera el texto resumen acompañado de la invitación a adjuntar el PDF guardado
-  const textoMensaje = `📊 *Informe Neurocognitivo WAIS-IV*\n👤 Evaluado: ${nombre} ${dni ? `(DNI: ${dni})` : ''}\n\n*Nota:* Archivo generado y exportado desde el Módulo WAIS-IV.`;
+  alert('Generando las 4 páginas en imágenes de alta calidad para WhatsApp...');
+  let filesArray = [];
+  const nombrePaciente = document.getElementById('name').value.trim() || 'informe_wais_iv';
 
-  if(navigator.share){
-    try {
-      // Intenta invocar la compartición nativa de archivos si el navegador/tablet lo soporta
-      await navigator.share({
-        title: `WAIS-IV · ${nombre}`,
-        text: textoMensaje
-      });
-    } catch(e) {
-      // Si el usuario cancela o hay restricción, abre WhatsApp directo con el texto y avisa
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
+  try {
+    for(let i=0; i<pages.length; i++){
+      const canvas = await html2canvas(pages[i], { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      const file = new File([blob], `${nombrePaciente}_pag_${i+1}.png`, { type: 'image/png' });
+      filesArray.push(file);
     }
-  } else {
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
+
+    if(navigator.canShare && navigator.canShare({ files: filesArray })){
+      await navigator.share({
+        title: `Informe WAIS-IV · ${nombrePaciente}`,
+        text: `📊 Informe Neurocognitivo WAIS-IV de ${nombrePaciente}`,
+        files: filesArray
+      });
+    } else {
+      // Descarga individual automática si el navegador no permite compartir en lote
+      filesArray.forEach((file, idx) => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(file);
+        a.download = file.name;
+        a.click();
+      });
+      alert('¡Imágenes descargadas en tu dispositivo! Seleccionalas en tu galería para enviarlas juntas por WhatsApp.');
+    }
+  } catch (err) {
+    alert('No se pudo invocar el menú de compartir de forma automática. Usá la opción de Guardar PDF Clásico.');
   }
 }
 
