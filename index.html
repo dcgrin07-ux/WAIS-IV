@@ -2,8 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v4.4</title>
-<!-- Librería html2canvas para rasterizar las páginas -->
+<title>WAIS-IV · Módulo Independiente · v4.5</title>
+<!-- Manifiesto embebido para habilitar la instalación y acceso directo sin errores -->
+<link rel="manifest" href='data:application/manifest+json,{
+  "name": "WAIS-IV Módulo Independiente",
+  "short_name": "WAIS-IV",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf3f8",
+  "theme_color": "#133b5c",
+  "icons": [{"src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23133b5c%22><text y=%2220%22 font-size=%2220%22 font-weight=%22bold%22>IV</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}]
+}'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
@@ -88,7 +97,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v4.4</span>
+    <span>WAIS-IV · v4.5</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -132,7 +141,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
     <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar PDF Clásico</button>
-    <button class="btn primary" style="flex:1; background:#25d366" onclick="descargarTarjetasWhatsApp()">📥 Descargar 4 Páginas para WhatsApp</button>
+    <button class="btn primary" style="flex:1; background:#25d366" onclick="descargarTarjetasWhatsAppHD()">📥 Descargar 4 Páginas HD para WhatsApp</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
@@ -338,7 +347,7 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.4',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.5',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -509,7 +518,7 @@ function descargarInformePDF(){
   window.print();
 }
 
-async function descargarTarjetasWhatsApp(){
+async function descargarTarjetasWhatsAppHD(){
   const pages = document.querySelectorAll('.book-page-item');
   if(!pages.length){ alert('Abrí primero el librito digital.'); return; }
   
@@ -517,24 +526,23 @@ async function descargarTarjetasWhatsApp(){
 
   try {
     for(let i=0; i<pages.length; i++){
-      const canvas = await html2canvas(pages[i], { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-      const dataUrl = canvas.toDataURL('image/png');
+      // Escala 3 optimizada en alta definición (HD) para evitar números borrosos o entrecortados
+      const canvas = await html2canvas(pages[i], { scale: 3, useCORS: true, backgroundColor: '#ffffff', logging: false });
+      const dataUrl = canvas.toDataURL('image/png', 1.0);
       const a = document.createElement('a');
       a.href = dataUrl;
-      a.download = `${nombrePaciente}_Pagina_${i+1}.png`;
+      a.download = `${nombrePaciente}_Pagina_${i+1}_HD.png`;
       a.click();
-      // Pequeña pausa para asegurar la descarga individual secuencial en la tablet
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 350));
     }
     
-    // Abre WhatsApp Web o la aplicación con un mensaje guía listo para adjuntar
-    const textoMensaje = `📊 Adjunto las 4 páginas del informe neurocognitivo WAIS-IV de ${nombrePaciente}.`;
+    const textoMensaje = `📊 Adjunto las 4 páginas en alta definición del informe neurocognitivo WAIS-IV de ${nombrePaciente}.`;
     setTimeout(() => {
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
     }, 1000);
 
   } catch (err) {
-    alert('Ocurrió un error al generar las imágenes. Usá la opción de Guardar PDF Clásico.');
+    alert('Ocurrió un error al generar las imágenes HD.');
   }
 }
 
