@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v5.4</title>
+<title>WAIS-IV · NexusDigital · v5.5</title>
 <link rel="manifest" href='data:application/manifest+json,{
   "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
@@ -78,8 +78,8 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="brand-box">
     <div>
-      <div class="brand-title">WAIS-IV · v5.4 (Arquitectura Visor Único + ID)</div>
-      <div class="brand-sub">Escala de Inteligencia de Wechsler para Adultos-IV</div>
+      <div class="brand-title">WAIS-IV · v5.5</div>
+      <div class="brand-sub" style="color:#ffb703; font-weight:700;">Escala de inteligencia de Wechsler para adultos-IV</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
@@ -376,7 +376,7 @@ function escapeHtml(s){return escaparHTML(s || '');}
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'5.4',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'5.5',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -389,7 +389,7 @@ window.onload = function(){
     setPart('e',now.getDate(),now.getMonth()+1,now.getFullYear());
   }
 
-  // Verificar si la URL actual contiene un ID de informe (ej: ?informe=ABC123 o hash #ABC123)
+  // Verificar si la URL actual contiene un ID de informe (Modo Visor Externo)
   verificarModoVisorExterno();
 };
 
@@ -479,7 +479,7 @@ function generarHTMLPaginasLibrito(){
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos-IV</h2>
+          <h2>Escala de inteligencia de Wechsler para adultos-IV</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -568,9 +568,12 @@ function generarIdUnico(){
 }
 
 function abrirInformeDigital(){
-  if(!Object.keys(currentIndexResults).length){alert('Calculá primero los resultados antes de ver el informe digital.');return;}
+  if(!Object.keys(currentIndexResults).length){
+    alert('Por favor, ingresá los puntajes y hacé clic en "Calcular escalares" antes de ver el informe digital.');
+    return;
+  }
   
-  // 1. Crear ID único y empaquetar los datos actuales del formulario en localStorage
+  // 1. Crear ID único y empaquetar los datos actuales del formulario
   currentReportId = generarIdUnico();
   const payload = {
     name: document.getElementById('name').value,
@@ -590,16 +593,17 @@ function abrirInformeDigital(){
   try {
     localStorage.setItem('WAIS_REPORT_' + currentReportId, JSON.stringify(payload));
   } catch(e) {
-    console.warn('No se pudo guardar en localStorage local, usando respaldo en memoria.');
+    console.warn('Aviso: Almacenamiento local restringido, utilizando respaldo en memoria.');
   }
 
   // 2. Construir la URL propia del visor único
   const baseUrl = window.location.href.split('?')[0].split('#')[0];
   const urlFinal = `${baseUrl}?informe=${currentReportId}`;
   
-  document.getElementById('generatedUrlText').textContent = urlFinal;
+  const urlTextEl = document.getElementById('generatedUrlText');
+  if(urlTextEl) urlTextEl.textContent = urlFinal;
 
-  // 3. Renderizar el carrusel original en la vista activa
+  // 3. Renderizar el carrusel original intacto en la vista
   const carousel = document.getElementById('bookCarousel');
   if(carousel) {
     carousel.innerHTML = generarHTMLPaginasLibrito();
@@ -640,7 +644,6 @@ function verificarModoVisorExterno(){
       const dataRaw = localStorage.getItem('WAIS_REPORT_' + informeId);
       if(dataRaw){
         const data = JSON.parse(dataRaw);
-        // Rellenar datos en memoria para el visor
         if(data.name) document.getElementById('name').value = data.name;
         if(data.dni) document.getElementById('dni').value = data.dni;
         if(data.examiner) document.getElementById('examiner').value = data.examiner;
@@ -653,7 +656,6 @@ function verificarModoVisorExterno(){
         if(data.observaciones) document.getElementById('observaciones').value = data.observaciones;
         if(data.indices) currentIndexResults = data.indices;
         
-        // Simular tabla de escalares guardadas para el visor
         if(data.scalars){
           let tbodyHtml = '';
           for(const [code, info] of Object.entries(data.scalars)){
@@ -663,15 +665,16 @@ function verificarModoVisorExterno(){
           if(scalarContainer) scalarContainer.innerHTML = `<table><thead><tr><th>Código</th><th>Subprueba</th><th>Puntaje natural</th><th>Puntuación escalar</th></tr></thead><tbody>${tbodyHtml}</tbody></table>`;
         }
 
-        // Mostrar directamente el carrusel de 5 páginas en modo visor externo
         const carousel = document.getElementById('bookCarousel');
         if(carousel) {
           carousel.innerHTML = generarHTMLPaginasLibrito();
         }
         document.getElementById('formCardsContainer').classList.add('hidden');
         document.getElementById('protocolCard').classList.remove('hidden');
-        document.getElementById('urlDisplayBox').style.display = 'block';
-        document.getElementById('generatedUrlText').textContent = window.location.href;
+        const urlBox = document.getElementById('urlDisplayBox');
+        if(urlBox) urlBox.style.display = 'block';
+        const urlTextEl = document.getElementById('generatedUrlText');
+        if(urlTextEl) urlTextEl.textContent = window.location.href;
       }
     } catch(err) {
       console.error('Error al cargar informe externo:', err);
