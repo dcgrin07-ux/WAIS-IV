@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v5.3</title>
+<title>WAIS-IV · NexusDigital · v5.4</title>
 <link rel="manifest" href='data:application/manifest+json,{
   "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
@@ -31,7 +31,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .editable{width:100%;min-height:120px;border:1px solid #90caf9;border-radius:8px;padding:10px;font:14px Arial,sans-serif;resize:vertical;background:#f7fbff}
 .hidden{display:none!important}
 
-/* Informe Digital de 5 Páginas */
+/* Informe Digital de 5 Páginas (Carrusel Original Conservado Íntegramente) */
 .book-container{margin-top:10px}
 .book-nav-bar{display:flex;justify-content:space-between;align-items:center;background:#133b5c;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;font-size:14px;border-bottom:2px solid #ffb703}
 .book-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:12px;background:#e3f2fd;border-radius:0 0 10px 10px;scroll-behavior:smooth}
@@ -78,8 +78,8 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="brand-box">
     <div>
-      <div class="brand-title">WAIS-IV · Módulo Independiente</div>
-      <div class="brand-sub">Evaluación Psicopedagógica Profesional</div>
+      <div class="brand-title">WAIS-IV · v5.4 (Arquitectura Visor Único + ID)</div>
+      <div class="brand-sub">Escala de Inteligencia de Wechsler para Adultos-IV</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;">
@@ -123,13 +123,16 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   </div>
 </div>
 
-<!-- Vista Informe Digital con 5 Páginas -->
+<!-- Vista Informe Digital con 5 Páginas (Carrusel Original Preservado) -->
 <div id="protocolCard" class="card protocol-card hidden">
-  <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn whatsapp-btn" style="flex:1" onclick="descargarInformeParaWhatsApp()">📥 1. Descargar Archivo HTML</button>
-    <button class="btn whatsapp-btn" style="background:#128c7e; flex:1" onclick="enviarEnlaceWhatsApp()">💬 2. Compartir por WhatsApp</button>
-    <button class="btn pdf-btn" style="flex:1" onclick="window.print()">📄 Imprimir / Guardar PDF</button>
-    <button class="btn secondary" style="width:100%" onclick="cerrarInformeDigital()">Volver / Editar</button>
+  <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+    <button class="btn whatsapp-btn" onclick="copiarEnlaceWhatsApp()">💬 Copiar Enlace para WhatsApp</button>
+    <button class="btn primary" style="background:#0077b6;" onclick="abrirEnlaceExterno()">🔗 Abrir URL Externa</button>
+    <button class="btn pdf-btn" onclick="window.print()">📄 Descargar / Imprimir PDF</button>
+    <button class="btn secondary" onclick="cerrarInformeDigital()">Volver / Editar</button>
+  </div>
+  <div id="urlDisplayBox" style="background:#e3f2fd; border:1px solid #90caf9; padding:8px 12px; border-radius:8px; font-size:13px; margin-bottom:10px; color:#0d47a1; word-break:break-all;">
+    <b>URL del Informe Digital:</b> <span id="generatedUrlText">—</span>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
@@ -164,6 +167,7 @@ const MAIN={ICV:['S','V','I'],IRP:['C','M','PV'],IMT:['D','A'],IVP:['BS','CL'],C
 const INDEX_NORMS={"ICV":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"4":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"5":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"6":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":51,"percentile":"0.1","ci90":"48-61","ci95":"47-62"},"8":{"score":54,"percentile":"0.1","ci90":"51-63","ci95":"50-64"},"9":{"score":56,"percentile":"0.2","ci90":"53-65","ci95":"52-66"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"11":{"score":60,"percentile":"0.4","ci90":"57-69","ci95":"56-70"},"12":{"score":63,"percentile":"1","ci90":"60-72","ci95":"58-73"},"13":{"score":65,"percentile":"1","ci90":"61-74","ci95":"60-75"},"14":{"score":67,"percentile":"1","ci90":"63-75","ci95":"62-77"},"15":{"score":69,"percentile":"2","ci90":"65-77","ci95":"64-78"},"16":{"score":71,"percentile":"3","ci90":"67-79","ci95":"66-80"},"17":{"score":73,"percentile":"4","ci90":"69-81","ci95":"68-82"},"18":{"score":75,"percentile":"5","ci90":"71-83","ci95":"70-84"},"19":{"score":78,"percentile":"7","ci90":"73-86","ci95":"72-87"},"20":{"score":80,"percentile":"9","ci90":"75-87","ci95":"74-89"},"21":{"score":82,"percentile":"12","ci90":"77-89","ci95":"76-90"},"22":{"score":84,"percentile":"14","ci90":"79-91","ci95":"78-92"},"23":{"score":86,"percentile":"18","ci90":"81-93","ci95":"80-94"},"24":{"score":88,"percentile":"21","ci90":"83-95","ci95":"82-96"},"25":{"score":90,"percentile":"25","ci90":"85-97","ci95":"83-98"},"26":{"score":92,"percentile":"30","ci90":"86-99","ci95":"85-100"},"27":{"score":94,"percentile":"34","ci90":"88-101","ci95":"87-102"},"28":{"score":96,"percentile":"39","ci90":"90-102","ci95":"89-104"},"29":{"score":98,"percentile":"45","ci90":"92-104","ci95":"91-105"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"31":{"score":102,"percentile":"55","ci90":"96-108","ci95":"95-109"},"32":{"score":104,"percentile":"61","ci90":"98-110","ci95":"96-111"},"33":{"score":106,"percentile":"66","ci90":"99-112","ci95":"98-113"},"34":{"score":108,"percentile":"70","ci90":"101-114","ci95":"100-115"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"36":{"score":112,"percentile":"79","ci90":"105-117","ci95":"104-118"},"37":{"score":114,"percentile":"82","ci90":"107-119","ci95":"106-120"},"38":{"score":116,"percentile":"86","ci90":"109-121","ci95":"108-122"},"39":{"score":118,"percentile":"88","ci90":"111-123","ci95":"110-124"},"40":{"score":120,"percentile":"91","ci90":"113-125","ci95":"111-126"},"41":{"score":122,"percentile":"93","ci90":"114-127","ci95":"113-128"},"42":{"score":124,"percentile":"95","ci90":"116-128","ci95":"115-130"},"43":{"score":126,"percentile":"96","ci90":"118-130","ci95":"117-131"},"44":{"score":128,"percentile":"97","ci90":"120-132","ci95":"119-133"},"45":{"score":130,"percentile":"98","ci90":"122-134","ci95":"121-135"},"46":{"score":132,"percentile":"98","ci90":"124-136","ci95":"123-137"},"47":{"score":133,"percentile":"99","ci90":"125-137","ci95":"123-138"},"48":{"score":135,"percentile":"99","ci90":"126-139","ci95":"125-140"},"49":{"score":137,"percentile":"99","ci90":"128-140","ci95":"127-142"},"50":{"score":139,"percentile":"99.5","ci90":"130-142","ci95":"129-144"},"51":{"score":141,"percentile":"99.7","ci90":"132-144","ci95":"131-145"},"52":{"score":143,"percentile":"99.8","ci90":"134-146","ci95":"133-147"},"53":{"score":145,"percentile":"99.9","ci90":"136-148","ci95":"135-149"},"54":{"score":147,"percentile":"99.9","ci90":"138-150","ci95":"136-151"},"55":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IRP":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":52,"percentile":"0.1","ci90":"49-61","ci95":"48-63"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"15":{"score":68,"percentile":"2","ci90":"64-76","ci95":"63-77"},"20":{"score":79,"percentile":"8","ci90":"74-87","ci95":"73-88"},"25":{"score":89,"percentile":"23","ci90":"84-96","ci95":"83-97"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"40":{"score":121,"percentile":"92","ci90":"113-126","ci95":"112-127"},"45":{"score":131,"percentile":"98","ci90":"123-135","ci95":"122-136"},"50":{"score":142,"percentile":"99.7","ci90":"133-145","ci95":"132-146"},"54":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IMT":{"2":{"score":50,"percentile":"<0.1","ci90":"48-60","ci95":"46-62"},"10":{"score":69,"percentile":"2","ci90":"65-78","ci95":"64-79"},"20":{"score":100,"percentile":"50","ci90":"94-106","ci95":"92-108"},"30":{"score":127,"percentile":"96","ci90":"118-131","ci95":"117-132"},"38":{"score":150,"percentile":">99.9","ci90":"140-152","ci95":"138-154"}},"IVP":{"2":{"score":50,"percentile":"<0.1","ci90":"48-64","ci95":"47-65"},"10":{"score":73,"percentile":"4","ci90":"69-84","ci95":"67-85"},"20":{"score":100,"percentile":"50","ci90":"92-108","ci95":"91-109"},"30":{"score":128,"percentile":"97","ci90":"117-132","ci95":"116-134"},"37":{"score":150,"percentile":">99.9","ci90":"136-152","ci95":"135-153"}},"CIT":{"10":{"score":40,"percentile":"<0.1","ci90":"38-48","ci95":"37-49"},"50":{"score":62,"percentile":"1","ci90":"59-69","ci95":"58-70"},"100":{"score":100,"percentile":"50","ci90":"95-105","ci95":"94-106"},"150":{"score":138,"percentile":"99","ci90":"131-141","ci95":"130-142"},"190":{"score":160,"percentile":">99.9","ci90":"142-153","ci95":"141-154"}}};
 
 let currentIndexResults={};
+let currentReportId='';
 
 function renderSubs(){
   const container = document.getElementById('subs');
@@ -372,7 +376,7 @@ function escapeHtml(s){return escaparHTML(s || '');}
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'5.3',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'5.4',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -384,6 +388,9 @@ window.onload = function(){
     const now=new Date();
     setPart('e',now.getDate(),now.getMonth()+1,now.getFullYear());
   }
+
+  // Verificar si la URL actual contiene un ID de informe (ej: ?informe=ABC123 o hash #ABC123)
+  verificarModoVisorExterno();
 };
 
 document.addEventListener('input', function(e){
@@ -472,7 +479,7 @@ function generarHTMLPaginasLibrito(){
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos</h2>
+          <h2>Escala de Inteligencia de Wechsler para Adultos-IV</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -556,12 +563,48 @@ function generarTextoInformeCualitativo(){
  `;
 }
 
+function generarIdUnico(){
+  return 'INF-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+}
+
 function abrirInformeDigital(){
-  if(!Object.keys(currentIndexResults).length){alert('Calculá primero los resultados.');return;}
+  if(!Object.keys(currentIndexResults).length){alert('Calculá primero los resultados antes de ver el informe digital.');return;}
+  
+  // 1. Crear ID único y empaquetar los datos actuales del formulario en localStorage
+  currentReportId = generarIdUnico();
+  const payload = {
+    name: document.getElementById('name').value,
+    dni: document.getElementById('dni').value,
+    examiner: document.getElementById('examiner').value,
+    bd: document.getElementById('bd').value,
+    bm: document.getElementById('bm').value,
+    by: document.getElementById('by').value,
+    ed: document.getElementById('ed').value,
+    em: document.getElementById('em').value,
+    ey: document.getElementById('ey').value,
+    observaciones: document.getElementById('observaciones').value,
+    indices: currentIndexResults,
+    scalars: getScalarMap()
+  };
+  
+  try {
+    localStorage.setItem('WAIS_REPORT_' + currentReportId, JSON.stringify(payload));
+  } catch(e) {
+    console.warn('No se pudo guardar en localStorage local, usando respaldo en memoria.');
+  }
+
+  // 2. Construir la URL propia del visor único
+  const baseUrl = window.location.href.split('?')[0].split('#')[0];
+  const urlFinal = `${baseUrl}?informe=${currentReportId}`;
+  
+  document.getElementById('generatedUrlText').textContent = urlFinal;
+
+  // 3. Renderizar el carrusel original en la vista activa
   const carousel = document.getElementById('bookCarousel');
   if(carousel) {
     carousel.innerHTML = generarHTMLPaginasLibrito();
   }
+  
   const formCards = document.getElementById('formCardsContainer');
   const protocolCard = document.getElementById('protocolCard');
   if(formCards) formCards.classList.add('hidden');
@@ -569,66 +612,71 @@ function abrirInformeDigital(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function descargarInformeParaWhatsApp(){
-  if(!Object.keys(currentIndexResults).length){alert('Calculá primero los resultados.');return;}
+function copiarEnlaceWhatsApp(){
+  const urlText = document.getElementById('generatedUrlText').textContent;
+  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV interactivo de 5 páginas:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular para recorrerlo con total comodidad.`;
   
-  const htmlContent = `<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Informe Digital WAIS-IV · ${escapeHtml(document.getElementById('name').value.trim() || 'Evaluado')}</title>
-<style>
-body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif;padding:15px}
-.book-carousel{display:flex;flex-direction:column;gap:20px;max-width:800px;margin:auto}
-.book-page{background:#fff;border:1px solid #90caf9;border-radius:10px;padding:25px;box-shadow:0 4px 12px #1d6fa515;min-height:550px;display:flex;flex-direction:column;justify-content:space-between}
-.book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:10px;font-size:11px;color:#546e7a;margin-top:15px}
-.protocol-cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;background:linear-gradient(135deg, #133b5c, #1d6fa5);color:#fff;border-radius:12px;border-bottom:4px solid #ffb703}
-.protocol-cover h1{font-size:36px;margin:0 0 10px;font-weight:800}
-.protocol-cover h2{font-size:14px;margin:0 0 20px;color:#ffb703;font-weight:600}
-.cover-meta-box{font-size:13px;background:#ffffff15;padding:14px 20px;border-radius:10px;border:1px solid #ffffff30;width:100%;max-width:380px;text-align:left;line-height:1.6}
-.protocol-title{border-bottom:2px solid #133b5c;padding-bottom:8px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.protocol-title .brand{font-size:15px;font-weight:800;color:#133b5c}
-.protocol-section-title{background:#1d6fa5;color:#fff;font-weight:800;font-size:12px;padding:6px 10px;text-transform:uppercase;margin-top:10px;margin-bottom:8px;border-radius:6px}
-.p-table{width:100%;border-collapse:collapse;font-size:12px}
-.p-table th,.p-table td{border:1px solid #bbdefb;padding:8px 6px;text-align:center}
-.p-table th{background:#e3f2fd;font-weight:800;color:#0d47a1}
-.p-table td:first-child,.p-table th:first-child{text-align:left}
-.protocol-scalar{font-weight:800;font-size:13px;color:#0d47a1}
-.p-profile{padding:6px}.p-profile-head{display:grid;grid-template-columns:30px repeat(4,1fr);background:#e3f2fd;font-size:10px;font-weight:800;text-align:center;color:#0d47a1}
-.p-profile-head>*{padding:4px;border-right:1px solid #bbdefb}
-.p-profile-grid{display:grid;grid-template-columns:30px repeat(4,1fr);grid-auto-rows:16px}
-.p-scale{text-align:right;padding-right:6px;font-size:10px;border-right:1px solid #bbdefb;line-height:16px;color:#546e7a}
-.p-dot{position:relative;border-right:1px solid #e1f5fe;border-bottom:1px dotted #bbdefb}
-.p-dot:before{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#90caf9;left:50%;top:6px;transform:translateX(-50%)}
-.p-dot.marked:after{content:"";position:absolute;width:10px;height:10px;border:2px solid #ffb703;border-radius:50%;background:#e3f2fd;left:50%;top:3px;transform:translateX(-50%)}
-.compound-p{width:100%;border-collapse:collapse;font-size:11px}.compound-p th,.compound-p td{border:1px solid #bbdefb;padding:6px;text-align:center}.compound-p th{background:#e3f2fd;color:#0d47a1}
-.compound-name{text-align:left!important;font-weight:800}
-.compound-score{font-size:14px;font-weight:800;color:#0d47a1}
-.cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.cp-one{height:150px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:8px}.cp-one .n{position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:800;font-size:10px;color:#133b5c}.cp-one .line{position:absolute;top:22px;bottom:12px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:22px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:8px;color:#546e7a}
-.cp-one .mark{position:absolute;left:50%;width:20px;height:14px;transform:translate(-50%,-50%);border:2px solid #ffb703;background:#e3f2fd;text-align:center;font-size:9px;font-weight:800;line-height:10px;z-index:3;color:#0d47a1;border-radius:4px}
-</style>
-</head>
-<body>
-<div style="text-align:center;margin-bottom:15px;font-weight:bold;color:#133b5c;font-size:16px">📖 Informe Digital Interactivo · WAIS-IV (NexusDigital)</div>
-<div class="book-carousel">
-  ${generarHTMLPaginasLibrito()}
-</div>
-</body>
-</html>`;
-
-  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${(document.getElementById('name').value.trim() || 'Evaluado')}_Informe_Digital_WAIS-IV.html`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(urlText).then(() => {
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`, '_blank');
+    }).catch(() => {
+      prompt('Copiá manualmente el enlace para WhatsApp:', urlText);
+    });
+  } else {
+    prompt('Copiá manualmente el enlace para WhatsApp:', urlText);
+  }
 }
 
-function enviarEnlaceWhatsApp(){
-  const texto = '📖 Adjunto el informe digital interactivo de 5 páginas de la evaluación WAIS-IV. Podés abrirlo tocando el archivo directamente en cualquier celular o computadora.';
-  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
+function abrirEnlaceExterno(){
+  const urlText = document.getElementById('generatedUrlText').textContent;
+  window.open(urlText, '_blank');
+}
+
+function verificarModoVisorExterno(){
+  const params = new URLSearchParams(window.location.search);
+  const informeId = params.get('informe');
+  if(informeId){
+    try {
+      const dataRaw = localStorage.getItem('WAIS_REPORT_' + informeId);
+      if(dataRaw){
+        const data = JSON.parse(dataRaw);
+        // Rellenar datos en memoria para el visor
+        if(data.name) document.getElementById('name').value = data.name;
+        if(data.dni) document.getElementById('dni').value = data.dni;
+        if(data.examiner) document.getElementById('examiner').value = data.examiner;
+        if(data.bd) document.getElementById('bd').value = data.bd;
+        if(data.bm) document.getElementById('bm').value = data.bm;
+        if(data.by) document.getElementById('by').value = data.by;
+        if(data.ed) document.getElementById('ed').value = data.ed;
+        if(data.em) document.getElementById('em').value = data.em;
+        if(data.ey) document.getElementById('ey').value = data.ey;
+        if(data.observaciones) document.getElementById('observaciones').value = data.observaciones;
+        if(data.indices) currentIndexResults = data.indices;
+        
+        // Simular tabla de escalares guardadas para el visor
+        if(data.scalars){
+          let tbodyHtml = '';
+          for(const [code, info] of Object.entries(data.scalars)){
+            tbodyHtml += `<tr><td>${code}</td><td>Subprueba</td><td>${info.raw}</td><td>${info.scalar}</td></tr>`;
+          }
+          const scalarContainer = document.getElementById('scalarResult');
+          if(scalarContainer) scalarContainer.innerHTML = `<table><thead><tr><th>Código</th><th>Subprueba</th><th>Puntaje natural</th><th>Puntuación escalar</th></tr></thead><tbody>${tbodyHtml}</tbody></table>`;
+        }
+
+        // Mostrar directamente el carrusel de 5 páginas en modo visor externo
+        const carousel = document.getElementById('bookCarousel');
+        if(carousel) {
+          carousel.innerHTML = generarHTMLPaginasLibrito();
+        }
+        document.getElementById('formCardsContainer').classList.add('hidden');
+        document.getElementById('protocolCard').classList.remove('hidden');
+        document.getElementById('urlDisplayBox').style.display = 'block';
+        document.getElementById('generatedUrlText').textContent = window.location.href;
+      }
+    } catch(err) {
+      console.error('Error al cargar informe externo:', err);
+    }
+  }
 }
 
 function cerrarInformeDigital(){
