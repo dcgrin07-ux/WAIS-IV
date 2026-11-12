@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v5.2</title>
+<title>WAIS-IV · NexusDigital · v5.3</title>
 <link rel="manifest" href='data:application/manifest+json,{
   "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
@@ -126,8 +126,9 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <!-- Vista Informe Digital con 5 Páginas -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn whatsapp-btn" style="flex:1" onclick="descargarInformeParaWhatsApp()">📥 Descargar Informe Digital (para WhatsApp)</button>
-    <button class="btn pdf-btn" style="flex:1" onclick="window.print()">📄 Guardar / Imprimir PDF (5 Págs)</button>
+    <button class="btn whatsapp-btn" style="flex:1" onclick="descargarInformeParaWhatsApp()">📥 1. Descargar Archivo HTML</button>
+    <button class="btn whatsapp-btn" style="background:#128c7e; flex:1" onclick="enviarEnlaceWhatsApp()">💬 2. Compartir por WhatsApp</button>
+    <button class="btn pdf-btn" style="flex:1" onclick="window.print()">📄 Imprimir / Guardar PDF</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarInformeDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
@@ -371,7 +372,7 @@ function escapeHtml(s){return escaparHTML(s || '');}
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'5.2',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'5.3',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -620,11 +621,14 @@ body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif;padd
   const a = document.createElement('a');
   a.href = url;
   a.download = `${(document.getElementById('name').value.trim() || 'Evaluado')}_Informe_Digital_WAIS-IV.html`;
+  document.body.appendChild(a);
   a.click();
-  
-  setTimeout(() => {
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('📖 Adjunto el informe digital interactivo de 5 páginas de la evaluación WAIS-IV. Podés abrirlo tocando el archivo directamente en cualquier celular o computadora.')}`, '_blank');
-  }, 1000);
+  document.body.removeChild(a);
+}
+
+function enviarEnlaceWhatsApp(){
+  const texto = '📖 Adjunto el informe digital interactivo de 5 páginas de la evaluación WAIS-IV. Podés abrirlo tocando el archivo directamente en cualquier celular o computadora.';
+  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
 }
 
 function cerrarInformeDigital(){
