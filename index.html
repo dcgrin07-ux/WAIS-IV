@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v4.1</title>
+<title>WAIS-IV · Módulo Independiente · v4.2</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
 header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
@@ -86,7 +86,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <header>
   <div class="header-left">
     <div class="app-icon">IV</div>
-    <span>WAIS-IV · v4.1</span>
+    <span>WAIS-IV · v4.2</span>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -129,8 +129,8 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 <!-- Vista Librito Digital con 4 Páginas -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar / Imprimir PDF (4 Páginas)</button>
-    <button class="btn secondary" style="flex:1" onclick="compartirInformeDirecto()">📤 Compartir Resumen WhatsApp</button>
+    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 1. Guardar PDF (4 Pág.)</button>
+    <button class="btn secondary" style="flex:1" onclick="compartirPDFWhatsApp()">📤 2. Enviar por WhatsApp</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
@@ -336,7 +336,7 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.1',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.2',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -507,28 +507,26 @@ function descargarInformePDF(){
   window.print();
 }
 
-function compartirInformeDirecto(){
+async function compartirPDFWhatsApp(){
   const nombre = document.getElementById('name').value.trim() || 'Paciente';
   const dni = document.getElementById('dni').value.trim();
-  let resumenIndices = '';
   
-  for(const [k, x] of Object.entries(currentIndexResults)){
-    resumenIndices += `• ${k}: ${x.score} (Percentil: ${x.percentile}, IC 90%: ${x.ci90})\n`;
-  }
-
-  const textoCompartir = `📊 *Informe Neurocognitivo WAIS-IV*\n👤 Evaluado: ${nombre} ${dni ? `(DNI: ${dni})` : ''}\n\n${resumenIndices}\n📝 Generado con Módulo Independiente WAIS-IV`;
+  // Genera el texto resumen acompañado de la invitación a adjuntar el PDF guardado
+  const textoMensaje = `📊 *Informe Neurocognitivo WAIS-IV*\n👤 Evaluado: ${nombre} ${dni ? `(DNI: ${dni})` : ''}\n\n*Nota:* Archivo generado y exportado desde el Módulo WAIS-IV.`;
 
   if(navigator.share){
-    navigator.share({
-      title: `WAIS-IV · ${nombre}`,
-      text: textoCompartir
-    }).catch(() => {});
+    try {
+      // Intenta invocar la compartición nativa de archivos si el navegador/tablet lo soporta
+      await navigator.share({
+        title: `WAIS-IV · ${nombre}`,
+        text: textoMensaje
+      });
+    } catch(e) {
+      // Si el usuario cancela o hay restricción, abre WhatsApp directo con el texto y avisa
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
+    }
   } else {
-    navigator.clipboard?.writeText(textoCompartir).then(() => {
-      alert('¡Resumen copiado al portapapeles!');
-    }).catch(() => {
-      prompt('Copiá el texto:', textoCompartir);
-    });
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
   }
 }
 
