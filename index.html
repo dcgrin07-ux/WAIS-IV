@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · Módulo Independiente · v4.6</title>
+<title>WAIS-IV · NexusDigital · v4.7</title>
 <link rel="manifest" href='data:application/manifest+json,{
-  "name": "WAIS-IV Módulo Independiente",
+  "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
   "start_url": "./",
   "display": "standalone",
@@ -12,12 +12,14 @@
   "theme_color": "#133b5c",
   "icons": [{"src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23133b5c%22><text y=%2220%22 font-size=%2220%22 font-weight=%22bold%22>IV</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}]
 }'>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
-header{background:#133b5c;color:#fff;padding:16px 18px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:12px;justify-content:space-between}
-.header-left{display:flex;align-items:center;gap:12px}
-.app-icon{width:36px;height:36px;background:linear-gradient(135deg, #1d6fa5, #0d47a1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 2px 6px #00000020;border:1px solid #90caf9;flex-shrink:0}
+header{background:#133b5c;color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffb703}
+.brand-box{display:flex;align-items:center;gap:12px}
+.brand-logo{width:42px;height:42px;background:linear-gradient(135deg, #1d6fa5, #0d47a1);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid #90caf9;position:relative;box-shadow:0 2px 6px #00000030}
+.brand-texts{display:flex;flex-direction:column}
+.brand-title{font-size:18px;font-weight:800;letter-spacing:.5px;color:#fff}
+.brand-sub{font-size:11px;color:#90caf9;font-weight:600}
 main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radius:14px;padding:15px;margin-bottom:14px;box-shadow:0 2px 10px #00000010;overflow-x:hidden}h2{margin:0 0 14px;font-size:20px;color:#133b5c}.note{background:#e3f2fd;border:1px solid #bbdefb;padding:12px;border-radius:10px;line-height:1.4;margin-bottom:12px;color:#0d47a1;font-size:14px}.ok{background:#eef8ee;border:1px solid #b7d7b7;color:#255c2b;padding:10px;border-radius:8px;font-size:14px}.error{background:#fff0f0;border:1px solid #e4aaaa;color:#8a2222;padding:10px;border-radius:8px;font-size:14px}.grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr)}}
 .datebox{display:flex;gap:4px;align-items:center}.datebox input{text-align:center;padding:10px 4px}.dd,.mm{width:54px!important}.yyyy{width:90px!important}.sep{font-size:20px;color:#65717c}.datehelp{font-size:11px;color:#68737d;margin-top:4px}.age{margin-top:12px}
@@ -25,27 +27,24 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 @media(min-width:768px){.subgrid{grid-template-columns:repeat(5,1fr)}}
 .sub{border:1px solid #b9d9f2;border-radius:10px;padding:10px;background:#f7fbff}.sub b{display:block;margin-bottom:6px;font-size:13px;color:#1d6fa5}.sub input{width:100%;padding:10px;border:1px solid #90caf9;border-radius:8px;font-size:16px;background:#fff}input{font-size:16px}.btn{border:0;border-radius:8px;padding:12px 16px;font-size:15px;cursor:pointer;margin:4px 4px 4px 0;font-weight:700;width:100%}
 @media(min-width:500px){.btn{width:auto}}
-.primary{background:#1d6fa5;color:#fff}.secondary{background:#e3f2fd;color:#0d47a1}.test-btn{background:#ff9800;color:#fff;font-size:13px;padding:8px 12px}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.primary{background:#1d6fa5;color:#fff}.secondary{background:#e3f2fd;color:#0d47a1}.test-btn{background:#ffb703;color:#133b5c;font-size:13px;padding:8px 12px;font-weight:800}.disabled{opacity:.45}.result-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:768px){.result-grid{grid-template-columns:1fr 1fr}}
 .box{border:1px solid #b9d9f2;border-radius:10px;padding:12px;background:#f7fbff}.box h3{margin:0 0 8px;font-size:16px;color:#133b5c}.big{font-size:26px;font-weight:700;color:#0d47a1}.muted{color:#546e7a;font-size:13px}.warn{background:#fffde7;border:1px solid #fff59d;padding:10px;border-radius:8px;color:#f57f17;font-size:14px}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px}th,td{padding:8px;border-bottom:1px solid #e1f5fe;text-align:left}th{background:#e1f5fe;color:#0d47a1}.status{font-weight:700}
 .editable{width:100%;min-height:120px;border:1px solid #90caf9;border-radius:8px;padding:10px;font:14px Arial,sans-serif;resize:vertical;background:#f7fbff}
-
 .hidden{display:none!important}
 
-/* Librito / Carrusel Horizontal Digital de 4 Páginas optimizado */
+/* Librito Digital de 5 Páginas */
 .book-container{margin-top:10px}
-.book-nav-bar{display:flex;justify-content:space-between;align-items:center;background:#133b5c;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;font-size:14px}
+.book-nav-bar{display:flex;justify-content:space-between;align-items:center;background:#133b5c;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:700;font-size:14px;border-bottom:2px solid #ffb703}
 .book-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:12px;background:#e3f2fd;border-radius:0 0 10px 10px;scroll-behavior:smooth}
 .book-page{flex:0 0 100%;scroll-snap-align:start;background:#fff;border:1px solid #90caf9;border-radius:10px;padding:20px;box-shadow:0 4px 12px #1d6fa515;min-height:560px;display:flex;flex-direction:column;justify-content:space-between}
 .book-page-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e1f5fe;padding-top:10px;font-size:12px;color:#546e7a;margin-top:12px}
 
-/* Carátula moderna de Página 1 */
-.protocol-cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 20px;background:linear-gradient(135deg, #133b5c, #1d6fa5);color:#fff;border-radius:12px;box-shadow:0 4px 15px #00000020}
+.protocol-cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 20px;background:linear-gradient(135deg, #133b5c, #1d6fa5);color:#fff;border-radius:12px;box-shadow:0 4px 15px #00000020;border-bottom:4px solid #ffb703}
 .protocol-cover h1{font-size:42px;margin:0 0 10px;letter-spacing:1px;font-weight:800}
-.protocol-cover h2{font-size:16px;margin:0 0 25px;color:#90caf9;font-weight:600}
+.protocol-cover h2{font-size:16px;margin:0 0 25px;color:#ffb703;font-weight:600}
 .cover-meta-box{font-size:14px;background:#ffffff15;padding:16px 22px;border-radius:10px;border:1px solid #ffffff30;width:100%;max-width:400px;text-align:left;line-height:1.7}
 
-/* Estilos de tablas y reportes internos mejorados para lectura directa */
 .protocol-title{border-bottom:2px solid #133b5c;padding-bottom:8px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
 .protocol-title .brand{font-size:16px;font-weight:800;color:#133b5c;display:flex;align-items:center;gap:8px}
 .protocol-section-title{background:#1d6fa5;color:#fff;font-weight:800;font-size:12px;padding:6px 10px;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;margin-bottom:8px;border-radius:6px}
@@ -61,44 +60,47 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
 .p-scale{text-align:right;padding-right:6px;font-size:10px;border-right:1px solid #bbdefb;line-height:16px;color:#546e7a}
 .p-dot{position:relative;border-right:1px solid #e1f5fe;border-bottom:1px dotted #bbdefb}
 .p-dot:before{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#90caf9;left:50%;top:6px;transform:translateX(-50%)}
-.p-dot.marked:after{content:"";position:absolute;width:10px;height:10px;border:2px solid #1d6fa5;border-radius:50%;background:#e3f2fd;left:50%;top:3px;transform:translateX(-50%)}
+.p-dot.marked:after{content:"";position:absolute;width:10px;height:10px;border:2px solid #ffb703;border-radius:50%;background:#e3f2fd;left:50%;top:3px;transform:translateX(-50%)}
 
 .compound-p{width:100%;border-collapse:collapse;font-size:11px}.compound-p th,.compound-p td{border:1px solid #bbdefb;padding:6px;text-align:center}.compound-p th{background:#e3f2fd;color:#0d47a1}
 .compound-name{text-align:left!important;font-weight:800}
 .compound-score{font-size:14px;font-weight:800;color:#0d47a1}
 
 .cp-five{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.cp-one{height:160px;border:1px solid #bbdefb;background:#f7fbff;position:relative;border-radius:8px}.cp-one .n{position:absolute;top:4px;left:0;right:0;text-align:center;font-weight:800;font-size:10px;color:#133b5c}.cp-one .line{position:absolute;top:22px;bottom:12px;left:50%;border-left:1px dashed #90caf9}.cp-one .scale{position:absolute;left:2px;right:2px;top:22px;bottom:12px;display:flex;flex-direction:column;justify-content:space-between;font-size:8px;color:#546e7a}
-.cp-one .mark{position:absolute;left:50%;width:20px;height:14px;transform:translate(-50%,-50%);border:2px solid #1d6fa5;background:#e3f2fd;text-align:center;font-size:9px;font-weight:800;line-height:10px;z-index:3;color:#0d47a1;border-radius:4px}
+.cp-one .mark{position:absolute;left:50%;width:20px;height:14px;transform:translate(-50%,-50%);border:2px solid #ffb703;background:#e3f2fd;text-align:center;font-size:9px;font-weight:800;line-height:10px;z-index:3;color:#0d47a1;border-radius:4px}
 
-/* NUEVO FORMATO DE TARJETAS HD PARA WHATSAPP (Proporción vertical ideal sin zoom) */
+/* IMPRESIÓN LIMPIA DE 5 PÁGINAS EN PDF */
 @media print {
-  @page { size: 1080px 1920px; margin: 0; }
+  @page { size: A4 portrait; margin: 10mm; }
   body { background: #fff !important; }
   header, .protocol-actions, .book-nav-bar, .book-page-footer { display: none !important; }
   #formCardsContainer { display: none !important; }
   #protocolCard { display: block !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
   .book-carousel { display: block !important; background: #fff !important; padding: 0 !important; overflow: visible !important; }
   .book-page {
-    display: flex !important;
-    width: 1080px !important;
-    height: 1920px !important;
+    display: block !important;
+    height: 275mm !important;
     box-sizing: border-box !important;
     page-break-after: always !important;
     break-after: page !important;
     border: 0 !important;
     box-shadow: none !important;
     margin: 0 !important;
-    padding: 60px !important;
-    font-size: 22px !important;
+    padding: 0 !important;
   }
 }
 </style>
 </head>
 <body>
 <header>
-  <div class="header-left">
-    <div class="app-icon">IV</div>
-    <span>WAIS-IV · v4.6</span>
+  <div class="brand-box">
+    <div class="brand-logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#90caf9" stroke-width="2"><path d="M4 17l6-6 4 4 6-6"/><circle cx="4" cy="17" r="2" fill="#90caf9"/><circle cx="10" cy="11" r="2.5" fill="#ffb703"/><circle cx="14" cy="15" r="2" fill="#90caf9"/><circle cx="20" cy="9" r="2" fill="#90caf9"/></svg>
+    </div>
+    <div class="brand-texts">
+      <span class="brand-title">NexusDigital</span>
+      <span class="brand-sub">Automatización inteligente para tu vida</span>
+    </div>
   </div>
   <button class="btn test-btn" onclick="autoRellenarPrueba()">⚡ Autorellenar Test</button>
 </header>
@@ -132,21 +134,21 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
     <h3 style="margin-top:0px;font-size:14px;color:#133b5c">Consideraciones clínicas y observaciones del examinador</h3>
     <textarea id="observaciones" class="editable" placeholder="Registrá aquí observaciones relevantes de la evaluación."></textarea>
     <div class="report-tools" style="margin-top:12px">
-      <button class="btn primary" onclick="abrirLibritoDigital()">Ver Presentación Librito Digital (4 Páginas)</button>
+      <button class="btn primary" onclick="abrirLibritoDigital()">Ver Presentación Librito Digital (5 Páginas)</button>
       <button class="btn secondary" onclick="guardarJSON()">Guardar datos JSON</button>
     </div>
   </div>
 </div>
 
-<!-- Vista Librito Digital con 4 Páginas -->
+<!-- Vista Librito Digital con 5 Páginas -->
 <div id="protocolCard" class="card protocol-card hidden">
   <div class="protocol-actions" style="margin-bottom:10px; display:flex; flex-wrap:wrap; gap:8px;">
-    <button class="btn primary" style="flex:1; background:#25d366" onclick="descargarTarjetasWhatsAppHD()">📥 Descargar 4 Tarjetas HD para WhatsApp</button>
+    <button class="btn primary" style="flex:1" onclick="descargarInformePDF()">📥 Guardar PDF Formal (5 Páginas)</button>
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Librito Digital WAIS-IV (4 Páginas)</span>
+      <span>📖 Librito Digital WAIS-IV (5 Páginas con Síntesis Integradora)</span>
       <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
     </div>
     <div class="book-carousel" id="bookCarousel"></div>
@@ -343,11 +345,51 @@ function generarTextoInformeCualitativo(){
  `;
 }
 
+function generarPaginaSintesisFinal(){
+  const nombre = document.getElementById('name').value.trim() || 'El/la evaluado/a';
+  const cit = currentIndexResults.CIT;
+  const icv = currentIndexResults.ICV;
+  const irp = currentIndexResults.IRP;
+  const imt = currentIndexResults.IMT;
+  const ivp = currentIndexResults.IVP;
+  
+  let textoConclusion = `Se administró la Escala de Inteligencia de Wechsler para Adultos (WAIS-IV) a <b>${escapeHtml(nombre)}</b>, obteniéndose un perfil neurocognitivo completo que permite caracterizar sus recursos intelectuales y operativos.`;
+  
+  if(cit) {
+    textoConclusion += ` El Cociente Intelectual Total (CIT) se ubica en un valor de <b>${cit.score}</b>, situándose en la categoría clínica de <b>${nivelCompuesto(cit.score)}</b> (Percentil ${cit.percentile}, con un intervalo de confianza del 90% entre ${cit.ci90}).`;
+  }
+  
+  textoConclusion += ` En el análisis de los dominios específicos, se observa el siguiente desempeño:`;
+  
+  let itemsDominios = [];
+  if(icv) itemsDominios.push(`<b>Comprensión Verbal (ICV = ${icv.score}):</b> ${nivelCompuesto(icv.score).toLowerCase()}, reflejando las competencias en razonamiento verbal y formación de conceptos.`);
+  if(irp) itemsDominios.push(`<b>Razonamiento Perceptivo (IRP = ${irp.score}):</b> ${nivelCompuesto(irp.score).toLowerCase()}, indicando el manejo de tareas visuoespaciales y razonamiento no verbal.`);
+  if(imt) itemsDominios.push(`<b>Memoria de Trabajo (IMT = ${imt.score}):</b> ${nivelCompuesto(imt.score).toLowerCase()}, vinculado al registro y manipulación activa de información a corto plazo.`);
+  if(ivp) itemsDominios.push(`<b>Velocidad de Procesamiento (IVP = ${ivp.score}):</b> ${nivelCompuesto(ivp.score).toLowerCase()}, que mide la agilidad en la exploración visual y destreza operativa.`);
+
+  return `
+    <div>
+      <div class="protocol-title">
+        <div class="brand"><div class="app-icon" style="width:26px;height:26px;font-size:12px;background:#133b5c;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800">IV</div> NexusDigital</div>
+        <div style="font-size:14px;font-weight:800;color:#133b5c">Conclusión e Informe Integrador</div>
+      </div>
+      <div class="protocol-section-title" style="margin-top:10px">Síntesis Conclusiva Final</div>
+      <div style="font-size:13px; line-height:1.6; color:#333; background:#f7fbff; border:1px solid #b9d9f2; padding:15px; border-radius:8px; margin-top:10px;">
+        <p style="margin-top:0">${textoConclusion}</p>
+        <ul style="padding-left:18px; margin-bottom:10px;">
+          ${itemsDominios.map(it=>`<li style="margin-bottom:6px;">${it}</li>`).join('')}
+        </ul>
+        <p style="margin-bottom:0">En suma, el perfil cuantitativo y cualitativo aporta elementos sólidos para la comprensión del funcionamiento cognitivo actual, orientando de manera precisa las estrategias de abordaje pertinentes.</p>
+      </div>
+    </div>
+  `;
+}
+
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.6',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.7',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
   const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv')+'.json';aEl.click();
 }
@@ -460,27 +502,27 @@ function abrirLibritoDigital(){
           </div>
         </div>
       </div>
-      <div class="book-page-footer"><span>Deslizá ➔</span><span>1 / 4</span></div>
+      <div class="book-page-footer"><span>NexusDigital · Automatización inteligente</span><span>1 / 5</span></div>
     </div>
 
-    <!-- PÁGINA 2: Datos Brutos convertidos a Naturales/Escalares -->
+    <!-- PÁGINA 2: Puntajes Brutos y Escalares -->
     <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
-          <div class="brand"><div class="app-icon" style="width:26px;height:26px;font-size:12px">IV</div> WAIS-IV</div>
+          <div class="brand"><div style="width:24px;height:24px;background:#133b5c;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800">IV</div> NexusDigital</div>
           <div style="font-size:14px;font-weight:800;color:#133b5c">Puntajes Brutos y Escalares</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
       </div>
-      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>2 / 4</span></div>
+      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>2 / 5</span></div>
     </div>
 
-    <!-- PÁGINA 3: Índices obtenidos y los Dos Gráficos -->
+    <!-- PÁGINA 3: Índices Principales y Gráficos -->
     <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
-          <div class="brand"><div class="app-icon" style="width:26px;height:26px;font-size:12px">IV</div> WAIS-IV</div>
+          <div class="brand"><div style="width:24px;height:24px;background:#133b5c;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800">IV</div> NexusDigital</div>
           <div style="font-size:14px;font-weight:800;color:#133b5c">Puntuaciones Compuestas y Gráficos</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Índices Principales</div>
@@ -489,21 +531,27 @@ function abrirLibritoDigital(){
         <div class="p-profile">${protocoloEquivalentProfile(sc)}</div>
         ${protocoloCompoundProfile()}
       </div>
-      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>3 / 4</span></div>
+      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>3 / 5</span></div>
     </div>
 
-    <!-- PÁGINA 4: Análisis Cualitativo e Informe del Psicopedagogo -->
+    <!-- PÁGINA 4: Análisis Cualitativo e Informe -->
     <div class="book-page book-page-item">
       <div>
         <div class="protocol-title">
-          <div class="brand"><div class="app-icon" style="width:26px;height:26px;font-size:12px">IV</div> WAIS-IV</div>
+          <div class="brand"><div style="width:24px;height:24px;background:#133b5c;color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800">IV</div> NexusDigital</div>
           <div style="font-size:14px;font-weight:800;color:#133b5c">Análisis Cualitativo e Informe</div>
         </div>
         <div style="margin-top:10px">
           ${generarTextoInformeCualitativo()}
         </div>
       </div>
-      <div class="book-page-footer"><span>Fin del informe</span><span>4 / 4</span></div>
+      <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>4 / 5</span></div>
+    </div>
+
+    <!-- PÁGINA 5: Síntesis Conclusiva Final -->
+    <div class="book-page book-page-item">
+      ${generarPaginaSintesisFinal()}
+      <div class="book-page-footer"><span>Fin del informe formal · NexusDigital</span><span>5 / 5</span></div>
     </div>
   `;
 
@@ -512,32 +560,10 @@ function abrirLibritoDigital(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-async function descargarTarjetasWhatsAppHD(){
-  const pages = document.querySelectorAll('.book-page-item');
-  if(!pages.length){ alert('Abrí primero el librito digital.'); return; }
-  
+function descargarInformePDF(){
   const nombrePaciente = document.getElementById('name').value.trim() || 'informe_wais_iv';
-
-  try {
-    for(let i=0; i<pages.length; i++){
-      // Generación adaptada en alta definición con proporción vertical (ideal para celulares sin zoom)
-      const canvas = await html2canvas(pages[i], { scale: 3, useCORS: true, backgroundColor: '#ffffff', logging: false, width: 1080, windowWidth: 1080 });
-      const dataUrl = canvas.toDataURL('image/png', 1.0);
-      const a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = `${nombrePaciente}_Tarjeta_${i+1}_HD.png`;
-      a.click();
-      await new Promise(resolve => setTimeout(resolve, 350));
-    }
-    
-    const textoMensaje = `📊 Adjunto las 4 tarjetas en alta definición del informe neurocognitivo WAIS-IV de ${nombrePaciente}.`;
-    setTimeout(() => {
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textoMensaje)}`, '_blank');
-    }, 1000);
-
-  } catch (err) {
-    alert('Ocurrió un error al generar las tarjetas HD.');
-  }
+  document.title = nombrePaciente;
+  window.print();
 }
 
 function cerrarLibritoDigital(){
