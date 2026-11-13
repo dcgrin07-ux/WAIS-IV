@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v4.9.4</title>
+<title>WAIS-IV · NexusDigital · v4.9.5</title>
 <link rel="manifest" href='data:application/manifest+json,{
-  "name": "WAIS-IV NexusDigital v4.9.4",
+  "name": "WAIS-IV NexusDigital v4.9.5",
   "short_name": "WAIS-IV",
   "start_url": "./",
   "display": "standalone",
@@ -83,7 +83,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   <div class="brand-box">
     <div>
       <div class="brand-title">WAIS-IV · Escala de Inteligencia de Wechsler para Adultos</div>
-      <div class="brand-sub">NexusDigital · v4.9.4</div>
+      <div class="brand-sub">NexusDigital · v4.9.5</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;" id="headerActionBox">
@@ -138,7 +138,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Informe Digital WAIS-IV (v4.9.4 - 5 Páginas con Síntesis Integradora) · NexusDigital</span>
+      <span>📖 Informe Digital WAIS-IV (v4.9.5 - 5 Páginas con Síntesis Integradora) · NexusDigital</span>
       <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
     </div>
     <div class="book-carousel" id="bookCarousel"></div>
@@ -169,7 +169,6 @@ const MAIN={ICV:['S','V','I'],IRP:['C','M','PV'],IMT:['D','A'],IVP:['BS','CL'],C
 const INDEX_NORMS={"ICV":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"4":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"5":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"6":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":51,"percentile":"0.1","ci90":"48-61","ci95":"47-62"},"8":{"score":54,"percentile":"0.1","ci90":"51-63","ci95":"50-64"},"9":{"score":56,"percentile":"0.2","ci90":"53-65","ci95":"52-66"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"11":{"score":60,"percentile":"0.4","ci90":"57-69","ci95":"56-70"},"12":{"score":63,"percentile":"1","ci90":"60-72","ci95":"58-73"},"13":{"score":65,"percentile":"1","ci90":"61-74","ci95":"60-75"},"14":{"score":67,"percentile":"1","ci90":"63-75","ci95":"62-77"},"15":{"score":69,"percentile":"2","ci90":"65-77","ci95":"64-78"},"16":{"score":71,"percentile":"3","ci90":"67-79","ci95":"66-80"},"17":{"score":73,"percentile":"4","ci90":"69-81","ci95":"68-82"},"18":{"score":75,"percentile":"5","ci90":"71-83","ci95":"70-84"},"19":{"score":78,"percentile":"7","ci90":"73-86","ci95":"72-87"},"20":{"score":80,"percentile":"9","ci90":"75-87","ci95":"74-89"},"21":{"score":82,"percentile":"12","ci90":"77-89","ci95":"76-90"},"22":{"score":84,"percentile":"14","ci90":"79-91","ci95":"78-92"},"23":{"score":86,"percentile":"18","ci90":"81-93","ci95":"80-94"},"24":{"score":88,"percentile":"21","ci90":"83-95","ci95":"82-96"},"25":{"score":90,"percentile":"25","ci90":"85-97","ci95":"83-98"},"26":{"score":92,"percentile":"30","ci90":"86-99","ci95":"85-100"},"27":{"score":94,"percentile":"34","ci90":"88-101","ci95":"87-102"},"28":{"score":96,"percentile":"39","ci90":"90-102","ci95":"89-104"},"29":{"score":98,"percentile":"45","ci90":"92-104","ci95":"91-105"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"31":{"score":102,"percentile":"55","ci90":"96-108","ci95":"95-109"},"32":{"score":104,"percentile":"61","ci90":"98-110","ci95":"96-111"},"33":{"score":106,"percentile":"66","ci90":"99-112","ci95":"98-113"},"34":{"score":108,"percentile":"70","ci90":"101-114","ci95":"100-115"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"36":{"score":112,"percentile":"79","ci90":"105-117","ci95":"104-118"},"37":{"score":114,"percentile":"82","ci90":"107-119","ci95":"106-120"},"38":{"score":116,"percentile":"86","ci90":"109-121","ci95":"108-122"},"39":{"score":118,"percentile":"88","ci90":"111-123","ci95":"110-124"},"40":{"score":120,"percentile":"91","ci90":"113-125","ci95":"111-126"},"41":{"score":122,"percentile":"93","ci90":"114-127","ci95":"113-128"},"42":{"score":124,"percentile":"95","ci90":"116-128","ci95":"115-130"},"43":{"score":126,"percentile":"96","ci90":"118-130","ci95":"117-131"},"44":{"score":128,"percentile":"97","ci90":"120-132","ci95":"119-133"},"45":{"score":130,"percentile":"98","ci90":"122-134","ci95":"121-135"},"46":{"score":132,"percentile":"98","ci90":"124-136","ci95":"123-137"},"47":{"score":133,"percentile":"99","ci90":"125-137","ci95":"123-138"},"48":{"score":135,"percentile":"99","ci90":"126-139","ci95":"125-140"},"49":{"score":137,"percentile":"99","ci90":"128-140","ci95":"127-142"},"50":{"score":139,"percentile":"99.5","ci90":"130-142","ci95":"129-144"},"51":{"score":141,"percentile":"99.7","ci90":"132-144","ci95":"131-145"},"52":{"score":143,"percentile":"99.8","ci90":"134-146","ci95":"133-147"},"53":{"score":145,"percentile":"99.9","ci90":"136-148","ci95":"135-149"},"54":{"score":147,"percentile":"99.9","ci90":"138-150","ci95":"136-151"},"55":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IRP":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":52,"percentile":"0.1","ci90":"49-61","ci95":"48-63"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"15":{"score":68,"percentile":"2","ci90":"64-76","ci95":"63-77"},"20":{"score":79,"percentile":"8","ci90":"74-87","ci95":"73-88"},"25":{"score":89,"percentile":"23","ci90":"84-96","ci95":"83-97"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"40":{"score":121,"percentile":"92","ci90":"113-126","ci95":"112-127"},"45":{"score":131,"percentile":"98","ci90":"123-135","ci95":"122-136"},"50":{"score":142,"percentile":"99.7","ci90":"133-145","ci95":"132-146"},"54":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IMT":{"2":{"score":50,"percentile":"<0.1","ci90":"48-60","ci95":"46-62"},"10":{"score":69,"percentile":"2","ci90":"65-78","ci95":"64-79"},"20":{"score":100,"percentile":"50","ci90":"94-106","ci95":"92-108"},"30":{"score":127,"percentile":"96","ci90":"118-131","ci95":"117-132"},"38":{"score":150,"percentile":">99.9","ci90":"140-152","ci95":"138-154"}},"IVP":{"2":{"score":50,"percentile":"<0.1","ci90":"48-64","ci95":"47-65"},"10":{"score":73,"percentile":"4","ci90":"69-84","ci95":"67-85"},"20":{"score":100,"percentile":"50","ci90":"92-108","ci95":"91-109"},"30":{"score":128,"percentile":"97","ci90":"117-132","ci95":"116-134"},"37":{"score":150,"percentile":">99.9","ci90":"136-152","ci95":"135-153"}},"CIT":{"10":{"score":40,"percentile":"<0.1","ci90":"38-48","ci95":"37-49"},"50":{"score":62,"percentile":"1","ci90":"59-69","ci95":"58-70"},"100":{"score":100,"percentile":"50","ci90":"95-105","ci95":"94-106"},"150":{"score":138,"percentile":"99","ci90":"131-141","ci95":"130-142"},"190":{"score":160,"percentile":">99.9","ci90":"142-153","ci95":"141-154"}}};
 
 let currentIndexResults={};
-let currentReportId='';
 
 function renderSubs(){
   const container = document.getElementById('subs');
@@ -271,7 +270,6 @@ function obtenerPuntajeCompuesto(name, sum){
     }
     return tabla[String(closest)];
   }
-  // Estimación matemática clínica si no hay tabla exacta cargada
   let scoreEst = Math.round(100 + (sum - 30) * 3.33);
   if(scoreEst < 40) scoreEst = 40;
   if(scoreEst > 160) scoreEst = 160;
@@ -326,7 +324,7 @@ function autoRellenarPrueba(){
   document.getElementById('dni').value = '25487963';
   document.getElementById('examiner').value = 'Lic. Diego Grin';
   setPart('b', 15, 6, 1985);
-  setPart('e', 12, 11, 2026);
+  setPart('e', 13, 11, 2026);
   
   const valoresPrueba = {C:35, S:18, D:22, M:16, V:32, A:12, BS:40, PV:15, I:14, CL:65};
   for(const [code, val] of Object.entries(valoresPrueba)){
@@ -341,33 +339,33 @@ function nivelCompuesto(score){
  if(score>=130)return'Muy superior'; if(score>=120)return'Superior'; if(score>=110)return'Promedio alto'; if(score>=90)return'Promedio'; if(score>=80)return'Promedio bajo'; if(score>=70)return'Límite'; return'Extremadamente bajo';
 }
 
-function descripcionIndice(name,score){
+function descripcionIndiceExplicativa(name,score){
  const nivel=nivelCompuesto(score);
  const nombresLargos = {'ICV':'Índice de Comprensión Verbal (ICV)','IRP':'Índice de Razonamiento Perceptivo (IRP)','IMT':'Índice de Memoria de Trabajo (IMT)','IVP':'Índice de Velocidad de Procesamiento (IVP)'};
- const descripcionesTecnicas = {
-   'ICV': score >= 90 ? 'Adecuada capacidad para comprender y establecer relaciones conceptuales, formación de conceptos verbales y razonamiento abstracto.' : 'Dificultades relativas en la formación de conceptos abstractos y razonamiento verbal.',
-   'IRP': score >= 90 ? 'Adecuado razonamiento perceptivo y visuoespacial, con buenas competencias para la resolución de problemas no verbales.' : 'Mayores exigencias o dificultades relativas en el procesamiento visoespacial y la organización perceptiva.',
-   'IMT': score >= 90 ? 'Suficiente capacidad de registro, mantenimiento y manipulación activa de información en la memoria a corto plazo.' : 'Dificultades para sostener y manipular información mentalmente bajo demanda activa.',
-   'IVP': score >= 90 ? 'Eficiencia conservada en la exploración visual, discriminación rápida de estímulos y ejecución veloz.' : 'Menor velocidad y eficiencia en el procesamiento visual bajo presión temporal.'
+ const impactos = {
+   'ICV': score >= 90 ? 'Facilita la capacidad para procesar información verbal, construir conceptos abstractos, articular razonamientos lógicos y volcar conocimientos adquiridos en la resolución de problemas cotidianos y académicos.' : 'Se evidencian mayores desafíos en la abstracción verbal y conceptualización, lo que puede repercutir en la comprensión de consignas complejas y la expresión elaborada de ideas.',
+   'IRP': score >= 90 ? 'Favorece el manejo fluido de relaciones espaciales, la integración visuo-constructiva y el análisis visual de situaciones no verbales sin depender del lenguaje.' : 'Sugiere menor agilidad en el procesamiento visoespacial y la organización perceptual, impactando en tareas de armado, diseño y lectura de estímulos no verbales.',
+   'IMT': score >= 90 ? 'Asegura una óptima retención temporal, manipulación mental activa de datos y sostén atencional bajo exigencia de memoria operativa.' : 'Indica vulnerabilidad en el mantenimiento temporal de la información en línea, afectando procesos que requieren retener y operar simultáneamente con datos.',
+   'IVP': score >= 90 ? 'Otorga gran fluidez operativa, agilidad en la exploración visual rápida y destreza ejecutiva bajo presión temporal.' : 'Refleja menor velocidad de ejecución motora y perceptual, lo que puede enlentecer la resolución de tareas extensas con límite de tiempo.'
  };
- return `<div class="qual-box" style="border:1px solid #b9d9f2;border-radius:8px;padding:10px;background:#f7fbff"><h4>${nombresLargos[name]||name} · ${nivel} (${score})</h4><p style="font-size:13px;line-height:1.4;margin:4px 0 0;color:#333">${descripcionesTecnicas[name]||''}</p></div>`;
+ return `<div class="qual-box" style="border:1px solid #b9d9f2;border-radius:8px;padding:12px;background:#f7fbff;margin-bottom:8px"><h4>${nombresLargos[name]||name} · ${nivel} (${score})</h4><p style="font-size:13px;line-height:1.5;margin:6px 0 0;color:#333">${impactos[name]||''}</p></div>`;
 }
 
 function generarTextoInformeCualitativo(){
  const names=['ICV','IRP','IMT','IVP'];
- const qualHtml=names.filter(k=>currentIndexResults[k]).map(k=>descripcionIndice(k,currentIndexResults[k].score)).join('');
+ const qualHtml=names.filter(k=>currentIndexResults[k]).map(k=>descripcionIndiceExplicativa(k,currentIndexResults[k].score)).join('');
  const cit=currentIndexResults.CIT;
  const nombre=document.getElementById('name').value.trim()||'la persona evaluada';
  const dni=document.getElementById('dni').value.trim();
  const obs=document.getElementById('observaciones').value.trim();
 
- let resumenCit = cit ? `El funcionamiento intelectual global estimado mediante el Cociente Intelectual Total (CIT) se sitúa en el rango ${nivelCompuesto(cit.score).toLowerCase()} (${cit.score}). ` : '';
+ let resumenCit = cit ? `El funcionamiento intelectual global estimado mediante el Cociente Intelectual Total (CIT) se sitúa en el rango ${nivelCompuesto(cit.score).toLowerCase()} (${cit.score}), representando una síntesis equilibrada de los recursos cognitivos evaluados. ` : '';
  
  return `
-   <h3 style="margin-top:0;font-size:16px;color:#133b5c">Síntesis interpretativa integrada</h3>
-   <p style="font-size:13px;line-height:1.4;margin:0 0 10px 0">Protocolo administrado a <b>${escapeHtml(nombre)}</b>${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}. ${resumenCit}</p>
+   <h3 style="margin-top:0;font-size:16px;color:#133b5c">Análisis funcional e impacto operativo</h3>
+   <p style="font-size:13px;line-height:1.5;margin:0 0 10px 0">Evaluación correspondiente a <b>${escapeHtml(nombre)}</b>${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}. ${resumenCit}</p>
    <div class="qual-grid" style="display:grid;grid-template-columns:1fr;gap:8px;margin:6px 0">${qualHtml}</div>
-   ${obs ? `<h3 style="font-size:15px;margin:10px 0 4px;color:#133b5c">Observaciones clínicas</h3><p style="font-size:13px;margin:0;line-height:1.4">${escapeHtml(obs)}</p>` : ''}
+   ${obs ? `<h3 style="font-size:15px;margin:12px 0 4px;color:#133b5c">Observaciones clínicas del examinador</h3><p style="font-size:13px;margin:0;line-height:1.4">${escapeHtml(obs)}</p>` : ''}
  `;
 }
 
@@ -379,33 +377,36 @@ function generarPaginaSintesisFinal(){
   const imt = currentIndexResults.IMT;
   const ivp = currentIndexResults.IVP;
   
-  let textoConclusion = `Se administró la Escala de Inteligencia de Wechsler para Adultos (WAIS-IV) a <b>${escapeHtml(nombre)}</b>, obteniéndose un perfil neurocognitivo completo que permite caracterizar sus recursos intelectuales y operativos.`;
+  let fortalezas = [];
+  let areasDesafiantes = [];
   
+  [icv, irp, imt, ivp].forEach((dom, idx) => {
+    if(!dom) return;
+    const nombres = ['Comprensión Verbal', 'Razonamiento Perceptivo', 'Memoria de Trabajo', 'Velocidad de Procesamiento'];
+    if(dom.score >= 100) fortalezas.push(`<b>${nombres[idx]} (${dom.score}):</b> constituye un recurso sólido y facilitador para el desempeño.`);
+    else areasDesafiantes.push(`<b>${nombres[idx]} (${dom.score}):</b> representa un área de mayor vulnerabilidad que requiere apoyos o estrategias específicas.`);
+  });
+
+  let textoConclusion = `El perfil cognitivo configurado por <b>${escapeHtml(nombre)}</b> en la Escala WAIS-IV evidencia una dinámica particular en sus recursos intelectuales.`;
   if(cit) {
-    textoConclusion += ` El Cociente Intelectual Total (CIT) se ubica en un valor de <b>${cit.score}</b>, situándose en la categoría clínica de <b>${nivelCompuesto(cit.score)}</b> (Percentil ${cit.percentile}, con un intervalo de confianza del 90% entre ${cit.ci90}).`;
+    textoConclusion += ` El CIT de <b>${cit.score}</b> sitúa su funcionamiento general en la categoría <b>${nivelCompuesto(cit.score)}</b>, reflejando el potencial operativo actual y su implicancia directa en las demandas cotidianas y de resolución de problemas.`;
   }
-  
-  textoConclusion += ` En el análisis de los dominios específicos, se observa el siguiente desempeño:`;
-  
-  let itemsDominios = [];
-  if(icv) itemsDominios.push(`<b>Comprensión Verbal (ICV = ${icv.score}):</b> ${nivelCompuesto(icv.score).toLowerCase()}, reflejando las competencias en razonamiento verbal y formación de conceptos.`);
-  if(irp) itemsDominios.push(`<b>Razonamiento Perceptivo (IRP = ${irp.score}):</b> ${nivelCompuesto(irp.score).toLowerCase()}, indicando el manejo de tareas visuoespaciales y razonamiento no verbal.`);
-  if(imt) itemsDominios.push(`<b>Memoria de Trabajo (IMT = ${imt.score}):</b> ${nivelCompuesto(imt.score).toLowerCase()}, vinculado al registro y manipulación activa de información a corto plazo.`);
-  if(ivp) itemsDominios.push(`<b>Velocidad de Procesamiento (IVP = ${ivp.score}):</b> ${nivelCompuesto(ivp.score).toLowerCase()}, que mide la agilidad en la exploración visual y destreza operativa.`);
 
   return `
     <div>
       <div class="protocol-title">
-        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.4)</div>
+        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.5)</div>
         <div style="font-size:11px;color:#546e7a">NexusDigital</div>
       </div>
-      <div class="protocol-section-title" style="margin-top:10px">Síntesis Conclusiva Final</div>
+      <div class="protocol-section-title" style="margin-top:10px">Síntesis Integradora y Orientaciones Clínicas</div>
       <div style="font-size:13px; line-height:1.6; color:#333; background:#f7fbff; border:1px solid #b9d9f2; padding:15px; border-radius:8px; margin-top:10px;">
         <p style="margin-top:0">${textoConclusion}</p>
-        <ul style="padding-left:18px; margin-bottom:10px;">
-          ${itemsDominios.map(it=>`<li style="margin-bottom:6px;">${it}</li>`).join('')}
-        </ul>
-        <p style="margin-bottom:0">En suma, el perfil cuantitativo y cualitativo aporta elementos sólidos para la comprensión del funcionamiento cognitivo actual, orientando de manera precisa las estrategias de abordaje pertinentes.</p>
+        
+        ${fortalezas.length > 0 ? `<p style="margin-bottom:4px;font-weight:bold;color:#2e7d32">Áreas de fortalezas y recursos conservados:</p><ul style="padding-left:18px; margin-top:0; margin-bottom:10px;">${fortalezas.map(f=>`<li style="margin-bottom:4px;">${f}</li>`).join('')}</ul>` : ''}
+        
+        ${areasDesafiantes.length > 0 ? `<p style="margin-bottom:4px;font-weight:bold;color:#c62828">Áreas de vulnerabilidad funcional:</p><ul style="padding-left:18px; margin-top:0; margin-bottom:10px;">${areasDesafiantes.map(a=>`<li style="margin-bottom:4px;">${a}</li>`).join('')}</ul>` : ''}
+        
+        <p style="margin-bottom:0"><b>Implicancia práctica:</b> La lectura integral de este perfil permite orientar con precisión las intervenciones, potenciando las fortalezas cognitivas identificadas y compensando los desniveles funcionales para favorecer la autonomía y el rendimiento general.</p>
       </div>
     </div>
   `;
@@ -415,9 +416,9 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.9.4',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.9.5',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.4')+'.json';aEl.click();
+  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.5')+'.json';aEl.click();
 }
 
 window.onload = function(){
@@ -524,23 +525,12 @@ function protocoloIndexRows(){
   }).join('');
 }
 
-function generarIdUnico(){
-  return 'INF-' + Math.random().toString(36).substring(2, 9).toUpperCase();
-}
-
 function abrirLibritoDigital(){
   if(!Object.keys(currentIndexResults).length){alert('Calculá primero los resultados.');return;}
   
   const sc=getScalarMap();
-  const nombre=document.getElementById('name').value.trim()||'—';
-  const dni=document.getElementById('dni').value.trim();
-  const exam=document.getElementById('examiner').value.trim()||'—';
-  let edadTexto='—', grupo='—';
-  try{const a=calcAge();if(a){edadTexto=`${a.y} años, ${a.m} meses y ${a.d} días`;grupo=a.group;}}catch(e){}
-
-  currentReportId = generarIdUnico();
   const payload = {
-    version: '4.9.4',
+    v: '4.9.5',
     name: document.getElementById('name').value || '',
     dni: document.getElementById('dni').value || '',
     examiner: document.getElementById('examiner').value || '',
@@ -550,31 +540,33 @@ function abrirLibritoDigital(){
     ed: document.getElementById('ed').value || '',
     em: document.getElementById('em').value || '',
     ey: document.getElementById('ey').value || '',
-    observaciones: document.getElementById('observaciones').value || '',
-    indices: currentIndexResults,
-    scalars: sc
+    obs: document.getElementById('observaciones').value || '',
+    idx: currentIndexResults,
+    scl: sc
   };
   
-  try {
-    localStorage.setItem('WAIS_REPORT_' + currentReportId, JSON.stringify(payload));
-  } catch(e) {}
+  const jsonStr = JSON.stringify(payload);
+  const encodedData = encodeURIComponent(jsonStr);
 
   const baseUrl = window.location.href.split('?')[0].split('#')[0];
-  const urlFinal = `${baseUrl}?informe=${currentReportId}`;
+  const urlFinal = `${baseUrl}?data=${encodedData}`;
   
   const urlTextEl = document.getElementById('generatedUrlText');
   if(urlTextEl) urlTextEl.textContent = urlFinal;
   const urlBox = document.getElementById('urlDisplayBox');
   if(urlBox) urlBox.style.display = 'block';
 
-  renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, false);
+  renderizarContenidoLibrito(payload.name, payload.dni, payload.examiner, sc, false);
 
   document.getElementById('formCardsContainer').classList.add('hidden');
   document.getElementById('protocolCard').classList.remove('hidden');
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExterno){
+function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
+  let edadTexto='—';
+  try{const a=calcAge();if(a){edadTexto=`${a.y} años, ${a.m} meses y ${a.d} días`;}}catch(e){}
+
   const carousel = document.getElementById('bookCarousel');
   carousel.innerHTML = `
     <!-- PÁGINA 1: Carátula Moderna -->
@@ -582,7 +574,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.4)</h2>
+          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.5)</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -592,7 +584,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
           </div>
         </div>
       </div>
-      <div class="book-page-footer"><span>NexusDigital · v4.9.4</span><span>1 / 5</span></div>
+      <div class="book-page-footer"><span>NexusDigital · v4.9.5</span><span>1 / 5</span></div>
     </div>
 
     <!-- PÁGINA 2: Puntajes Brutos y Escalares -->
@@ -600,7 +592,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntajes Brutos y Escalares</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.5)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
@@ -613,7 +605,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntuaciones Compuestas</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.5)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Índices Principales</div>
         <table class="compound-p"><thead><tr><th>Índice</th><th>Suma</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
@@ -629,7 +621,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Análisis Cualitativo</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.5)</div>
         </div>
         <div style="margin-top:10px">
           ${generarTextoInformeCualitativo()}
@@ -641,7 +633,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
     <!-- PÁGINA 5: Síntesis Conclusiva Final -->
     <div class="book-page book-page-item">
       ${generarPaginaSintesisFinal()}
-      <div class="book-page-footer"><span>Fin del informe formal (v4.9.4) · NexusDigital</span><span>5 / 5</span></div>
+      <div class="book-page-footer"><span>Fin del informe formal (v4.9.5) · NexusDigital</span><span>5 / 5</span></div>
     </div>
   `;
 
@@ -661,7 +653,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
 function compartirWhatsApp(){
   const urlText = document.getElementById('generatedUrlText').textContent;
   const nombre = document.getElementById('name').value.trim() || 'Evaluado/a';
-  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.4) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
+  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.5) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
   
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(urlText).then(() => {
@@ -676,30 +668,26 @@ function compartirWhatsApp(){
 
 function verificarModoVisorExterno(){
   const params = new URLSearchParams(window.location.search);
-  const informeId = params.get('informe');
-  if(informeId){
+  const dataParam = params.get('data');
+  if(dataParam){
     try {
-      const dataRaw = localStorage.getItem('WAIS_REPORT_' + informeId);
-      if(dataRaw){
-        const data = JSON.parse(dataRaw);
-        if(data.name) document.getElementById('name').value = data.name;
-        if(data.dni) document.getElementById('dni').value = data.dni;
-        if(data.examiner) document.getElementById('examiner').value = data.examiner;
-        if(data.bd) document.getElementById('bd').value = data.bd;
-        if(data.bm) document.getElementById('bm').value = data.bm;
-        if(data.by) document.getElementById('by').value = data.by;
-        if(data.ed) document.getElementById('ed').value = data.ed;
-        if(data.em) document.getElementById('em').value = data.em;
-        if(data.ey) document.getElementById('ey').value = data.ey;
-        if(data.observaciones) document.getElementById('observaciones').value = data.observaciones;
-        if(data.indices) currentIndexResults = data.indices;
-        
-        let sc = data.scalars || {};
-        let edadTexto = '—';
-        try{const a=calcAge();if(a){edadTexto=`${a.y} años, ${a.m} meses y ${a.d} días`;}}catch(e){}
-
-        renderizarContenidoLibrito(data.name || '—', data.dni || '', data.examiner || '—', edadTexto, sc, true);
-      }
+      const jsonRaw = decodeURIComponent(dataParam);
+      const data = JSON.parse(jsonRaw);
+      
+      if(data.name) document.getElementById('name').value = data.name;
+      if(data.dni) document.getElementById('dni').value = data.dni;
+      if(data.examiner) document.getElementById('examiner').value = data.examiner;
+      if(data.bd) document.getElementById('bd').value = data.bd;
+      if(data.bm) document.getElementById('bm').value = data.bm;
+      if(data.by) document.getElementById('by').value = data.by;
+      if(data.ed) document.getElementById('ed').value = data.ed;
+      if(data.em) document.getElementById('em').value = data.em;
+      if(data.ey) document.getElementById('ey').value = data.ey;
+      if(data.obs) document.getElementById('observaciones').value = data.obs;
+      if(data.idx) currentIndexResults = data.idx;
+      
+      let sc = data.scl || {};
+      renderizarContenidoLibrito(data.name || '—', data.dni || '', data.examiner || '—', sc, true);
     } catch(err) {}
   }
 }
@@ -709,6 +697,7 @@ function cerrarLibritoDigital(){
   document.getElementById('formCardsContainer').classList.remove('hidden');
   const actionsBar = document.getElementById('protocolActionsBar');
   if(actionsBar) actionsBar.style.display = 'flex';
+  window.history.replaceState({}, document.title, window.location.pathname);
 }
 </script>
 </body>
