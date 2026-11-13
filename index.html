@@ -2,15 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v4.9.6</title>
+<title>WAIS-IV · NexusDigital · v4.9.7</title>
 <link rel="manifest" href='data:application/manifest+json,{
-  "name": "WAIS-IV NexusDigital v4.9.6",
+  "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#edf3f8",
   "theme_color": "#133b5c",
-  "icons": [{"src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23133b5c%22><text y=%2220%22 font-size=%2220%22 font-weight=%22bold%22>IV</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}]
+  "icons": [{"src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><rect width=%22128%22 height=%22128%22 rx=%2224%22 fill=%22%23133b5c%22/><text x=%2264%22 y=%2254%22 font-family=%22Arial,sans-serif%22 font-size=%2244%22 font-weight=%22bold%22 fill=%22%23ffb703%22 text-anchor=%22middle%22>W</text><text x=%2264%22 y=%22100%22 font-family=%22Arial,sans-serif%22 font-size=%2238%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>IV</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}]
 }'>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
@@ -94,7 +94,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   <div class="brand-box">
     <div>
       <div class="brand-title">WAIS-IV · Escala de Inteligencia de Wechsler para Adultos</div>
-      <div class="brand-sub">NexusDigital · v4.9.6</div>
+      <div class="brand-sub">NexusDigital · v4.9.7</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;" id="headerActionBox">
@@ -146,11 +146,11 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
     <button class="btn secondary" style="width:100%" onclick="cerrarLibritoDigital()">Volver / Editar</button>
   </div>
   <div id="urlDisplayBox" style="background:#e3f2fd; border:1px solid #90caf9; padding:8px 12px; border-radius:8px; font-size:13px; margin-bottom:10px; color:#0d47a1; word-break:break-all; display:none;">
-    <b>URL del Informe:</b> <span id="generatedUrlText">—</span>
+    <b>URL del Informe (Código Corto):</b> <span id="generatedUrlText">—</span>
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Informe Digital WAIS-IV (v4.9.6 - 5 Páginas) · NexusDigital</span>
+      <span>📖 Informe Digital WAIS-IV (v4.9.7 - 5 Páginas) · NexusDigital</span>
       <div style="display:flex; gap:8px; align-items:center;">
         <button class="btn print-btn" style="padding:4px 8px;font-size:12px;margin:0" onclick="window.print()">🖨️ Imprimir</button>
         <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
@@ -184,6 +184,7 @@ const MAIN={ICV:['S','V','I'],IRP:['C','M','PV'],IMT:['D','A'],IVP:['BS','CL'],C
 const INDEX_NORMS={"ICV":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"4":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"5":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"6":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":51,"percentile":"0.1","ci90":"48-61","ci95":"47-62"},"8":{"score":54,"percentile":"0.1","ci90":"51-63","ci95":"50-64"},"9":{"score":56,"percentile":"0.2","ci90":"53-65","ci95":"52-66"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"11":{"score":60,"percentile":"0.4","ci90":"57-69","ci95":"56-70"},"12":{"score":63,"percentile":"1","ci90":"60-72","ci95":"58-73"},"13":{"score":65,"percentile":"1","ci90":"61-74","ci95":"60-75"},"14":{"score":67,"percentile":"1","ci90":"63-75","ci95":"62-77"},"15":{"score":69,"percentile":"2","ci90":"65-77","ci95":"64-78"},"16":{"score":71,"percentile":"3","ci90":"67-79","ci95":"66-80"},"17":{"score":73,"percentile":"4","ci90":"69-81","ci95":"68-82"},"18":{"score":75,"percentile":"5","ci90":"71-83","ci95":"70-84"},"19":{"score":78,"percentile":"7","ci90":"73-86","ci95":"72-87"},"20":{"score":80,"percentile":"9","ci90":"75-87","ci95":"74-89"},"21":{"score":82,"percentile":"12","ci90":"77-89","ci95":"76-90"},"22":{"score":84,"percentile":"14","ci90":"79-91","ci95":"78-92"},"23":{"score":86,"percentile":"18","ci90":"81-93","ci95":"80-94"},"24":{"score":88,"percentile":"21","ci90":"83-95","ci95":"82-96"},"25":{"score":90,"percentile":"25","ci90":"85-97","ci95":"83-98"},"26":{"score":92,"percentile":"30","ci90":"86-99","ci95":"85-100"},"27":{"score":94,"percentile":"34","ci90":"88-101","ci95":"87-102"},"28":{"score":96,"percentile":"39","ci90":"90-102","ci95":"89-104"},"29":{"score":98,"percentile":"45","ci90":"92-104","ci95":"91-105"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"31":{"score":102,"percentile":"55","ci90":"96-108","ci95":"95-109"},"32":{"score":104,"percentile":"61","ci90":"98-110","ci95":"96-111"},"33":{"score":106,"percentile":"66","ci90":"99-112","ci95":"98-113"},"34":{"score":108,"percentile":"70","ci90":"101-114","ci95":"100-115"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"36":{"score":112,"percentile":"79","ci90":"105-117","ci95":"104-118"},"37":{"score":114,"percentile":"82","ci90":"107-119","ci95":"106-120"},"38":{"score":116,"percentile":"86","ci90":"109-121","ci95":"108-122"},"39":{"score":118,"percentile":"88","ci90":"111-123","ci95":"110-124"},"40":{"score":120,"percentile":"91","ci90":"113-125","ci95":"111-126"},"41":{"score":122,"percentile":"93","ci90":"114-127","ci95":"113-128"},"42":{"score":124,"percentile":"95","ci90":"116-128","ci95":"115-130"},"43":{"score":126,"percentile":"96","ci90":"118-130","ci95":"117-131"},"44":{"score":128,"percentile":"97","ci90":"120-132","ci95":"119-133"},"45":{"score":130,"percentile":"98","ci90":"122-134","ci95":"121-135"},"46":{"score":132,"percentile":"98","ci90":"124-136","ci95":"123-137"},"47":{"score":133,"percentile":"99","ci90":"125-137","ci95":"123-138"},"48":{"score":135,"percentile":"99","ci90":"126-139","ci95":"125-140"},"49":{"score":137,"percentile":"99","ci90":"128-140","ci95":"127-142"},"50":{"score":139,"percentile":"99.5","ci90":"130-142","ci95":"129-144"},"51":{"score":141,"percentile":"99.7","ci90":"132-144","ci95":"131-145"},"52":{"score":143,"percentile":"99.8","ci90":"134-146","ci95":"133-147"},"53":{"score":145,"percentile":"99.9","ci90":"136-148","ci95":"135-149"},"54":{"score":147,"percentile":"99.9","ci90":"138-150","ci95":"136-151"},"55":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IRP":{"3":{"score":50,"percentile":"<0.1","ci90":"47-60","ci95":"46-61"},"7":{"score":52,"percentile":"0.1","ci90":"49-61","ci95":"48-63"},"10":{"score":58,"percentile":"0.3","ci90":"55-67","ci95":"54-68"},"15":{"score":68,"percentile":"2","ci90":"64-76","ci95":"63-77"},"20":{"score":79,"percentile":"8","ci90":"74-87","ci95":"73-88"},"25":{"score":89,"percentile":"23","ci90":"84-96","ci95":"83-97"},"30":{"score":100,"percentile":"50","ci90":"94-106","ci95":"93-107"},"35":{"score":110,"percentile":"75","ci90":"103-115","ci95":"102-117"},"40":{"score":121,"percentile":"92","ci90":"113-126","ci95":"112-127"},"45":{"score":131,"percentile":"98","ci90":"123-135","ci95":"122-136"},"50":{"score":142,"percentile":"99.7","ci90":"133-145","ci95":"132-146"},"54":{"score":150,"percentile":">99.9","ci90":"140-153","ci95":"139-154"}},"IMT":{"2":{"score":50,"percentile":"<0.1","ci90":"48-60","ci95":"46-62"},"10":{"score":69,"percentile":"2","ci90":"65-78","ci95":"64-79"},"20":{"score":100,"percentile":"50","ci90":"94-106","ci95":"92-108"},"30":{"score":127,"percentile":"96","ci90":"118-131","ci95":"117-132"},"38":{"score":150,"percentile":">99.9","ci90":"140-152","ci95":"138-154"}},"IVP":{"2":{"score":50,"percentile":"<0.1","ci90":"48-64","ci95":"47-65"},"10":{"score":73,"percentile":"4","ci90":"69-84","ci95":"67-85"},"20":{"score":100,"percentile":"50","ci90":"92-108","ci95":"91-109"},"30":{"score":128,"percentile":"97","ci90":"117-132","ci95":"116-134"},"37":{"score":150,"percentile":">99.9","ci90":"136-152","ci95":"135-153"}},"CIT":{"10":{"score":40,"percentile":"<0.1","ci90":"38-48","ci95":"37-49"},"50":{"score":62,"percentile":"1","ci90":"59-69","ci95":"58-70"},"100":{"score":100,"percentile":"50","ci90":"95-105","ci95":"94-106"},"150":{"score":138,"percentile":"99","ci90":"131-141","ci95":"130-142"},"190":{"score":160,"percentile":">99.9","ci90":"142-153","ci95":"141-154"}}};
 
 let currentIndexResults={};
+let globalCloudReports = JSON.parse(localStorage.getItem('waisCloudDB') || '{}');
 
 function renderSubs(){
   const container = document.getElementById('subs');
@@ -410,7 +411,7 @@ function generarPaginaSintesisFinal(){
   return `
     <div>
       <div class="protocol-title">
-        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.6)</div>
+        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.7)</div>
         <div style="font-size:11px;color:#546e7a">NexusDigital</div>
       </div>
       <div class="protocol-section-title" style="margin-top:10px">Síntesis Integradora y Orientaciones Clínicas</div>
@@ -431,9 +432,9 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.9.6',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.9.7',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.6')+'.json';aEl.click();
+  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.7')+'.json';aEl.click();
 }
 
 window.onload = function(){
@@ -545,7 +546,7 @@ function abrirLibritoDigital(){
   
   const sc=getScalarMap();
   const payload = {
-    v: '4.9.6',
+    v: '4.9.7',
     name: document.getElementById('name').value || '',
     dni: document.getElementById('dni').value || '',
     examiner: document.getElementById('examiner').value || '',
@@ -560,11 +561,15 @@ function abrirLibritoDigital(){
     scl: sc
   };
   
-  const jsonStr = JSON.stringify(payload);
-  const encodedData = encodeURIComponent(jsonStr);
+  // Código corto basado en DNI o timestamp aleatorio guardado en LocalStorage
+  const dniVal = document.getElementById('dni').value.trim();
+  const shortKey = dniVal ? `wais_${dniVal}` : `wais_${Math.random().toString(36).substring(2, 8)}`;
+  
+  globalCloudReports[shortKey] = payload;
+  localStorage.setItem('waisCloudDB', JSON.stringify(globalCloudReports));
 
   const baseUrl = window.location.href.split('?')[0].split('#')[0];
-  const urlFinal = `${baseUrl}?data=${encodedData}`;
+  const urlFinal = `${baseUrl}?id=${shortKey}`;
   
   const urlTextEl = document.getElementById('generatedUrlText');
   if(urlTextEl) urlTextEl.textContent = urlFinal;
@@ -589,7 +594,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.6)</h2>
+          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.7)</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -599,7 +604,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
           </div>
         </div>
       </div>
-      <div class="book-page-footer"><span>NexusDigital · v4.9.6</span><span>1 / 5</span></div>
+      <div class="book-page-footer"><span>NexusDigital · v4.9.7</span><span>1 / 5</span></div>
     </div>
 
     <!-- PÁGINA 2: Puntajes Brutos y Escalares -->
@@ -607,7 +612,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntajes Brutos y Escalares</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.6)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.7)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
@@ -620,7 +625,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntuaciones Compuestas</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.6)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.7)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Índices Principales</div>
         <table class="compound-p"><thead><tr><th>Índice</th><th>Suma</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
@@ -636,7 +641,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Análisis Cualitativo</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.6)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.7)</div>
         </div>
         <div style="margin-top:10px">
           ${generarTextoInformeCualitativo()}
@@ -648,7 +653,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
     <!-- PÁGINA 5: Síntesis Conclusiva Final -->
     <div class="book-page book-page-item">
       ${generarPaginaSintesisFinal()}
-      <div class="book-page-footer"><span>Fin del informe formal (v4.9.6) · NexusDigital</span><span>5 / 5</span></div>
+      <div class="book-page-footer"><span>Fin del informe formal (v4.9.7) · NexusDigital</span><span>5 / 5</span></div>
     </div>
   `;
 
@@ -668,7 +673,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
 function compartirWhatsApp(){
   const urlText = document.getElementById('generatedUrlText').textContent;
   const nombre = document.getElementById('name').value.trim() || 'Evaluado/a';
-  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.6) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
+  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.7) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
   
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(urlText).then(() => {
@@ -683,27 +688,24 @@ function compartirWhatsApp(){
 
 function verificarModoVisorExterno(){
   const params = new URLSearchParams(window.location.search);
-  const dataParam = params.get('data');
-  if(dataParam){
-    try {
-      const jsonRaw = decodeURIComponent(dataParam);
-      const data = JSON.parse(jsonRaw);
-      
-      if(data.name) document.getElementById('name').value = data.name;
-      if(data.dni) document.getElementById('dni').value = data.dni;
-      if(data.examiner) document.getElementById('examiner').value = data.examiner;
-      if(data.bd) document.getElementById('bd').value = data.bd;
-      if(data.bm) document.getElementById('bm').value = data.bm;
-      if(data.by) document.getElementById('by').value = data.by;
-      if(data.ed) document.getElementById('ed').value = data.ed;
-      if(data.em) document.getElementById('em').value = data.em;
-      if(data.ey) document.getElementById('ey').value = data.ey;
-      if(data.obs) document.getElementById('observaciones').value = data.obs;
-      if(data.idx) currentIndexResults = data.idx;
-      
-      let sc = data.scl || {};
-      renderizarContenidoLibrito(data.name || '—', data.dni || '', data.examiner || '—', sc, true);
-    } catch(err) {}
+  const idParam = params.get('id');
+  
+  if(idParam && globalCloudReports[idParam]){
+    const data = globalCloudReports[idParam];
+    if(data.name) document.getElementById('name').value = data.name;
+    if(data.dni) document.getElementById('dni').value = data.dni;
+    if(data.examiner) document.getElementById('examiner').value = data.examiner;
+    if(data.bd) document.getElementById('bd').value = data.bd;
+    if(data.bm) document.getElementById('bm').value = data.bm;
+    if(data.by) document.getElementById('by').value = data.by;
+    if(data.ed) document.getElementById('ed').value = data.ed;
+    if(data.em) document.getElementById('em').value = data.em;
+    if(data.ey) document.getElementById('ey').value = data.ey;
+    if(data.obs) document.getElementById('observaciones').value = data.obs;
+    if(data.idx) currentIndexResults = data.idx;
+    
+    let sc = data.scl || {};
+    renderizarContenidoLibrito(data.name || '—', data.dni || '', data.examiner || '—', sc, true);
   }
 }
 
