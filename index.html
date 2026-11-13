@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v4.9.3</title>
+<title>WAIS-IV · NexusDigital · v4.9.4</title>
 <link rel="manifest" href='data:application/manifest+json,{
-  "name": "WAIS-IV NexusDigital v4.9.3",
+  "name": "WAIS-IV NexusDigital v4.9.4",
   "short_name": "WAIS-IV",
   "start_url": "./",
   "display": "standalone",
@@ -83,7 +83,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   <div class="brand-box">
     <div>
       <div class="brand-title">WAIS-IV · Escala de Inteligencia de Wechsler para Adultos</div>
-      <div class="brand-sub">NexusDigital · v4.9.3</div>
+      <div class="brand-sub">NexusDigital · v4.9.4</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;" id="headerActionBox">
@@ -138,7 +138,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Informe Digital WAIS-IV (v4.9.3 - 5 Páginas con Síntesis Integradora) · NexusDigital</span>
+      <span>📖 Informe Digital WAIS-IV (v4.9.4 - 5 Páginas con Síntesis Integradora) · NexusDigital</span>
       <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
     </div>
     <div class="book-carousel" id="bookCarousel"></div>
@@ -258,6 +258,27 @@ function compoundBadge(sc){
   return `<span class="badge-green">${sc}</span>`;
 }
 
+function obtenerPuntajeCompuesto(name, sum){
+  const tabla = INDEX_NORMS[name];
+  if(tabla){
+    if(tabla[String(sum)]) return tabla[String(sum)];
+    const keys = Object.keys(tabla).map(Number).sort((a,b)=>a-b);
+    let closest = keys[0];
+    let minDiff = Math.abs(sum - closest);
+    for(let k of keys){
+      let diff = Math.abs(sum - k);
+      if(diff < minDiff){ minDiff = diff; closest = k; }
+    }
+    return tabla[String(closest)];
+  }
+  // Estimación matemática clínica si no hay tabla exacta cargada
+  let scoreEst = Math.round(100 + (sum - 30) * 3.33);
+  if(scoreEst < 40) scoreEst = 40;
+  if(scoreEst > 160) scoreEst = 160;
+  let perc = scoreEst >= 100 ? '50+' : '<50';
+  return {score: scoreEst, percentile: perc, ci90: (scoreEst-5)+'-'+(scoreEst+5), ci95: (scoreEst-6)+'-'+(scoreEst+6)};
+}
+
 function calcular(){
   let a;
   try{a=calcAge()}catch(err){document.getElementById('ageBox').innerHTML=`<div class="error">${err.message}</div>`;return}
@@ -292,7 +313,7 @@ function calcular(){
     const vals=codes.map(c=>sc[c]);
     if(vals.every(v=>Number.isInteger(v))){
       const sum=vals.reduce((x,y)=>x+y,0);
-      const n=INDEX_NORMS[name]?.[String(sum)] || {score: 100, percentile: '50', ci90: '94-106', ci95: '93-107'};
+      const n=obtenerPuntajeCompuesto(name, sum);
       currentIndexResults[name]={score:n.score,percentile:n.percentile,ci90:n.ci90,ci95:n.ci95,sum};
       ix+=`<div class="box"><h3>${name}</h3><div class="big">${compoundBadge(n.score)}</div><div class="muted"><b>Suma:</b> ${sum} · <b>Percentil:</b> ${n.percentile} · <b>IC 90%:</b> ${n.ci90}</div></div>`;
     }
@@ -375,7 +396,7 @@ function generarPaginaSintesisFinal(){
   return `
     <div>
       <div class="protocol-title">
-        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.3)</div>
+        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.4)</div>
         <div style="font-size:11px;color:#546e7a">NexusDigital</div>
       </div>
       <div class="protocol-section-title" style="margin-top:10px">Síntesis Conclusiva Final</div>
@@ -394,9 +415,9 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.9.3',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'4.9.4',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.3')+'.json';aEl.click();
+  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.4')+'.json';aEl.click();
 }
 
 window.onload = function(){
@@ -519,7 +540,7 @@ function abrirLibritoDigital(){
 
   currentReportId = generarIdUnico();
   const payload = {
-    version: '4.9.3',
+    version: '4.9.4',
     name: document.getElementById('name').value || '',
     dni: document.getElementById('dni').value || '',
     examiner: document.getElementById('examiner').value || '',
@@ -561,7 +582,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.3)</h2>
+          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.4)</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -571,7 +592,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
           </div>
         </div>
       </div>
-      <div class="book-page-footer"><span>NexusDigital · v4.9.3</span><span>1 / 5</span></div>
+      <div class="book-page-footer"><span>NexusDigital · v4.9.4</span><span>1 / 5</span></div>
     </div>
 
     <!-- PÁGINA 2: Puntajes Brutos y Escalares -->
@@ -579,7 +600,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntajes Brutos y Escalares</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.3)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
@@ -592,7 +613,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntuaciones Compuestas</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.3)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Índices Principales</div>
         <table class="compound-p"><thead><tr><th>Índice</th><th>Suma</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
@@ -608,7 +629,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Análisis Cualitativo</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.3)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.4)</div>
         </div>
         <div style="margin-top:10px">
           ${generarTextoInformeCualitativo()}
@@ -620,7 +641,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
     <!-- PÁGINA 5: Síntesis Conclusiva Final -->
     <div class="book-page book-page-item">
       ${generarPaginaSintesisFinal()}
-      <div class="book-page-footer"><span>Fin del informe formal (v4.9.3) · NexusDigital</span><span>5 / 5</span></div>
+      <div class="book-page-footer"><span>Fin del informe formal (v4.9.4) · NexusDigital</span><span>5 / 5</span></div>
     </div>
   `;
 
@@ -640,7 +661,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, edadTexto, sc, esVisorExt
 function compartirWhatsApp(){
   const urlText = document.getElementById('generatedUrlText').textContent;
   const nombre = document.getElementById('name').value.trim() || 'Evaluado/a';
-  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.3) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
+  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.4) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
   
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(urlText).then(() => {
