@@ -2,15 +2,23 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WAIS-IV · NexusDigital · v4.9.9</title>
+<title>WAIS-IV · NexusDigital · v5.0.0</title>
 <link rel="manifest" href='data:application/manifest+json,{
   "name": "WAIS-IV NexusDigital",
   "short_name": "WAIS-IV",
-  "start_url": ".",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#edf3f8",
   "theme_color": "#133b5c",
-  "icons": [{"src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><rect width=%22128%22 height=%22128%22 rx=%2224%22 fill=%22%23133b5c%22/><text x=%2264%22 y=%2254%22 font-family=%22Arial,sans-serif%22 font-size=%2244%22 font-weight=%22bold%22 fill=%22%23ffb703%22 text-anchor=%22middle%22>W</text><text x=%2264%22 y=%22100%22 font-family=%22Arial,sans-serif%22 font-size=%2238%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>IV</text></svg>", "sizes": "192x192", "type": "image/svg+xml"}]
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Crect width=%22512%22 height=%22512%22 rx=%2296%22 fill=%22%23133b5c%22/%3E%3Ctext x=%22256%22 y=%22220%22 font-family=%22Arial,sans-serif%22 font-size=%22180%22 font-weight=%22bold%22 fill=%22%23ffb703%22 text-anchor=%22middle%22%3EW%3C/text%3E%3Ctext x=%22256%22 y=%22400%22 font-family=%22Arial,sans-serif%22 font-size=%22150%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22%3EIV%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }'>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf3f8;color:#18212b;font-family:Arial,sans-serif}
@@ -94,7 +102,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   <div class="brand-box">
     <div>
       <div class="brand-title">WAIS-IV · Escala de Inteligencia de Wechsler para Adultos</div>
-      <div class="brand-sub">NexusDigital · v4.9.9</div>
+      <div class="brand-sub">NexusDigital · v5.0.0</div>
     </div>
   </div>
   <div style="display:flex; align-items:center; gap:8px;" id="headerActionBox">
@@ -130,7 +138,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   
   <div class="card"><h2>5. Informe cualitativo y observaciones</h2>
     <h3 style="margin-top:0px;font-size:14px;color:#133b5c">Consideraciones clínicas y observaciones del examinador</h3>
-    <textarea id="observaciones" class="editable" placeholder="Escribí aquí tu análisis clínico personalizado. Este texto se imprimirá completo en la última página del informe."></textarea>
+    <textarea id="observaciones" class="editable" placeholder="Registrá aquí observaciones relevantes de la evaluación."></textarea>
     <div class="report-tools" style="margin-top:12px">
       <button class="btn primary" onclick="abrirLibritoDigital()">Ver Presentación Informe Digital (5 Páginas)</button>
       <button class="btn secondary" onclick="guardarJSON()">Guardar datos JSON</button>
@@ -150,7 +158,7 @@ main{max-width:1250px;margin:auto;padding:10px}.card{background:#fff;border-radi
   </div>
   <div class="book-container">
     <div class="book-nav-bar">
-      <span>📖 Informe Digital WAIS-IV (v4.9.9 - 5 Páginas) · NexusDigital</span>
+      <span>📖 Informe Digital WAIS-IV (v5.0.0 - 5 Páginas) · NexusDigital</span>
       <div style="display:flex; gap:8px; align-items:center;">
         <button class="btn print-btn" style="padding:4px 8px;font-size:12px;margin:0" onclick="window.print()">🖨️ Imprimir</button>
         <span style="font-size:12px; font-weight:400">Deslizá horizontalmente</span>
@@ -387,21 +395,32 @@ function generarTextoInformeCualitativo(){
 
 function generarPaginaSintesisFinal(){
   const nombre = document.getElementById('name').value.trim() || 'El/la evaluado/a';
-  const obs = document.getElementById('observaciones').value.trim();
+  const dni = document.getElementById('dni').value.trim();
   const cit = currentIndexResults.CIT;
-  let resumenCit = cit ? ` Cociente Intelectual Total (CIT): <b>${cit.score}</b> (${nivelCompuesto(cit.score)}).` : '';
+  const icv = currentIndexResults.ICV;
+  const irp = currentIndexResults.IRP;
+  const imt = currentIndexResults.IMT;
+  const ivp = currentIndexResults.IVP;
 
   return `
     <div>
       <div class="protocol-title">
-        <div class="brand">WAIS-IV · Protocolo Clínico (v4.9.9)</div>
+        <div class="brand">WAIS-IV · Protocolo Clínico (v5.0.0)</div>
         <div style="font-size:11px;color:#546e7a">NexusDigital</div>
       </div>
-      <div class="protocol-section-title" style="margin-top:10px">Síntesis Conclusiva y Consideraciones del Profesional</div>
+      <div class="protocol-section-title" style="margin-top:10px">Síntesis Conclusiva y Cierre Psicopedagógico</div>
       <div style="font-size:13px; line-height:1.6; color:#333; background:#f7fbff; border:1px solid #b9d9f2; padding:15px; border-radius:8px; margin-top:10px;">
-        <p style="margin-top:0"><b>Evaluado/a:</b> ${escapeHtml(nombre)}.${resumenCit}</p>
+        <p style="margin-top:0"><b>Evaluación psicométrica completada para:</b> ${escapeHtml(nombre)}${dni ? ` (DNI: ${escapeHtml(dni)})` : ''}.</p>
         <hr style="border:0; border-top:1px solid #bbdefb; margin:10px 0;">
-        ${obs ? `<div style="white-space: pre-wrap; font-size:14px; line-height:1.6;">${escapeHtml(obs)}</div>` : '<p style="color:#68737d; font-style:italic;">No se han ingresado consideraciones adicionales en el panel de observaciones.</p>'}
+        <p><b>Resumen de Rendimiento Compuesto:</b></p>
+        <ul style="padding-left:18px; margin-top:0; margin-bottom:10px;">
+          <li>Cociente Intelectual Total (CIT): <b>${cit ? `${cit.score} (${nivelCompuesto(cit.score)})` : '—'}</b></li>
+          <li>Comprensión Verbal (ICV): <b>${icv ? `${icv.score} (${nivelCompuesto(icv.score)})` : '—'}</b></li>
+          <li>Razonamiento Perceptivo (IRP): <b>${irp ? `${irp.score} (${nivelCompuesto(irp.score)})` : '—'}</b></li>
+          <li>Memoria de Trabajo (IMT): <b>${imt ? `${imt.score} (${nivelCompuesto(imt.score)})` : '—'}</b></li>
+          <li>Velocidad de Procesamiento (IVP): <b>${ivp ? `${ivp.score} (${nivelCompuesto(ivp.score)})` : '—'}</b></li>
+        </ul>
+        <p style="margin-bottom:0"><b>Dictamen final:</b> El perfil cuantitativo obtenido refleja de manera consistente las aptitudes intelectuales evaluadas bajo los parámetros normativos de la escala WAIS-IV, aportando elementos objetivos de gran valor para la formulación de estrategias de orientación y apoyo profesional.</p>
       </div>
     </div>
   `;
@@ -411,9 +430,9 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function limpiar(){location.reload()}
 
 function guardarJSON(){
-  const obj={version:'4.9.9',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
+  const obj={version:'5.0.0',marca:'NexusDigital',nombre:document.getElementById('name').value,dni:document.getElementById('dni').value,indices:currentIndexResults};
   const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
-  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v4.9.9')+'.json';aEl.click();
+  const aEl=document.createElement('a');aEl.href=URL.createObjectURL(blob);aEl.download=(document.getElementById('name').value.trim()||'wais-iv-v5.0.0')+'.json';aEl.click();
 }
 
 window.onload = function(){
@@ -525,7 +544,7 @@ function abrirLibritoDigital(){
   
   const sc=getScalarMap();
   const payload = {
-    v: '4.9.9',
+    v: '5.0.0',
     name: document.getElementById('name').value || '',
     dni: document.getElementById('dni').value || '',
     examiner: document.getElementById('examiner').value || '',
@@ -572,7 +591,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div style="display:flex;flex-direction:column;justify-content:center;height:100%">
         <div class="protocol-cover">
           <h1>WAIS-IV</h1>
-          <h2>Escala de Inteligencia de Wechsler para Adultos (v4.9.9)</h2>
+          <h2>Escala de Inteligencia de Wechsler para Adultos (v5.0.0)</h2>
           <div class="cover-meta-box">
             <div><b>Evaluado/a:</b> ${escapeHtml(nombre)}</div>
             ${dni ? `<div><b>DNI:</b> ${escapeHtml(dni)}</div>` : ''}
@@ -582,7 +601,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
           </div>
         </div>
       </div>
-      <div class="book-page-footer"><span>NexusDigital · v4.9.9</span><span>1 / 5</span></div>
+      <div class="book-page-footer"><span>NexusDigital · v5.0.0</span><span>1 / 5</span></div>
     </div>
 
     <!-- PÁGINA 2: Puntajes Brutos y Escalares -->
@@ -590,7 +609,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntajes Brutos y Escalares</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.9)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v5.0.0)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Desempeño en Subpruebas</div>
         ${protocoloSubtests(sc)}
@@ -603,7 +622,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Puntuaciones Compuestas</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.9)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v5.0.0)</div>
         </div>
         <div class="protocol-section-title" style="margin-top:6px">Índices Principales</div>
         <table class="compound-p"><thead><tr><th>Índice</th><th>Suma</th><th>Comp</th><th>%</th><th>IC 90%</th></tr></thead><tbody>${protocoloIndexRows()}</tbody></table>
@@ -619,7 +638,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div>
         <div class="protocol-title">
           <div class="brand">WAIS-IV · Análisis Cualitativo</div>
-          <div style="font-size:11px;color:#546e7a">NexusDigital (v4.9.9)</div>
+          <div style="font-size:11px;color:#546e7a">NexusDigital (v5.0.0)</div>
         </div>
         <div style="margin-top:10px">
           ${generarTextoInformeCualitativo()}
@@ -628,10 +647,10 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
       <div class="book-page-footer"><span>◀ Deslizá ▶</span><span>4 / 5</span></div>
     </div>
 
-    <!-- PÁGINA 5: Síntesis Conclusiva Final (Redactada por el Profesional) -->
+    <!-- PÁGINA 5: Síntesis Conclusiva Limpia -->
     <div class="book-page book-page-item">
       ${generarPaginaSintesisFinal()}
-      <div class="book-page-footer"><span>Fin del informe formal (v4.9.9) · NexusDigital</span><span>5 / 5</span></div>
+      <div class="book-page-footer"><span>Fin del informe formal (v5.0.0) · NexusDigital</span><span>5 / 5</span></div>
     </div>
   `;
 
@@ -651,7 +670,7 @@ function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
 function compartirWhatsApp(){
   const urlText = document.getElementById('generatedUrlText').textContent;
   const nombre = document.getElementById('name').value.trim() || 'Evaluado/a';
-  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v4.9.9) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
+  const mensaje = `📖 Hola, te comparto el enlace al Informe Digital WAIS-IV (v5.0.0) de 5 páginas para ${nombre}:\n\n${urlText}\n\nPodés abrirlo directamente desde tu celular.`;
   
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(urlText).then(() => {
