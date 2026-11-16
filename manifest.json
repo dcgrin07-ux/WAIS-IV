@@ -8,9 +8,9 @@
   "theme_color": "#133b5c",
   "icons": [
     {
-      "src": "icon-512.svg",
+      "src": "wais-iv-icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
