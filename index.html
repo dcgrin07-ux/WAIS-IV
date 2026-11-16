@@ -477,7 +477,7 @@ function protocoloEquivalentProfile(sc){
   let html=`<div class="p-profile-head"><span>Escala</span><span>Comp. verbal</span><span>Raz. perceptivo</span><span>Mem. de trabajo</span><span>Vel. procesam.</span></div><div class="p-profile-grid">`;
   for(let s=19;s>=1;s--){
     html+=`<div class="p-scale">${s}</div>`;
-    for(const g of ['ICV','IRP','IMT','IVP']){
+    for(let g of ['ICV','IRP','IMT','IVP']){
       const matchCode = groups[g].find(c => sc[c]?.scalar === s);
       let dotClass = 'p-dot';
       if(matchCode){
