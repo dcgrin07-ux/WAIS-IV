@@ -1,0 +1,17 @@
+{
+  "name": "WAIS-IV NexusDigital",
+  "short_name": "WAIS-IV",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#edf3f8",
+  "theme_color": "#133b5c",
+  "icons": [
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
