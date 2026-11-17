@@ -671,6 +671,20 @@ function compartirWhatsApp(){
   }
 }
 
+function copiarEnlaceSilencioso(){
+  const urlText = document.getElementById('generatedUrlText').textContent;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(urlText).then(() => {
+      alert('✅ Enlace copiado al portapapeles.');
+    }).catch(() => {
+      prompt('Copiá el enlace manualmente:', urlText);
+    });
+  } else {
+    prompt('Copiá el enlace manualmente:', urlText);
+  }
+}
+
+
 function verificarModoVisorExterno(){
   const params = new URLSearchParams(window.location.search);
   const dataParam = params.get('data');
