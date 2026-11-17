@@ -670,26 +670,43 @@ function compartirWhatsApp(){
 
 function verificarModoVisorExterno(){
   const params = new URLSearchParams(window.location.search);
-  const idParam = params.get('id');
+  const dataParam = params.get('data');
+  const idParam = params.get('id'); // Compatibilidad por si abre un enlace anterior
   
-  if(idParam && globalCloudReports[idParam]){
-    const data = globalCloudReports[idParam];
-    if(data.name) document.getElementById('name').value = data.name;
-    if(data.dni) document.getElementById('dni').value = data.dni;
-    if(data.examiner) document.getElementById('examiner').value = data.examiner;
-    if(data.bd) document.getElementById('bd').value = data.bd;
-    if(data.bm) document.getElementById('bm').value = data.bm;
-    if(data.by) document.getElementById('by').value = data.by;
-    if(data.ed) document.getElementById('ed').value = data.ed;
-    if(data.em) document.getElementById('em').value = data.em;
-    if(data.ey) document.getElementById('ey').value = data.ey;
-    if(data.obs) document.getElementById('observaciones').value = data.obs;
-    if(data.idx) currentIndexResults = data.idx;
+  let payload = null;
+
+  if(dataParam){
+    try {
+      // Decodificamos los datos que viajan seguros en la URL
+      const jsonString = decodeURIComponent(atob(dataParam).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      payload = JSON.parse(jsonString);
+    } catch(e) {
+      console.error("Error al decodificar los datos del informe", e);
+    }
+  } else if(idParam && globalCloudReports[idParam]){
+    payload = globalCloudReports[idParam];
+  }
+
+  if(payload){
+    if(payload.name) document.getElementById('name').value = payload.name;
+    if(payload.dni) document.getElementById('dni').value = payload.dni;
+    if(payload.examiner) document.getElementById('examiner').value = payload.examiner;
+    if(payload.bd) document.getElementById('bd').value = payload.bd;
+    if(payload.bm) document.getElementById('bm').value = payload.bm;
+    if(payload.by) document.getElementById('by').value = payload.by;
+    if(payload.ed) document.getElementById('ed').value = payload.ed;
+    if(payload.em) document.getElementById('em').value = payload.em;
+    if(payload.ey) document.getElementById('ey').value = payload.ey;
+    if(payload.obs) document.getElementById('observaciones').value = payload.obs;
+    if(payload.idx) currentIndexResults = payload.idx;
     
-    let sc = data.scl || {};
-    renderizarContenidoLibrito(data.name || '—', data.dni || '', data.examiner || '—', sc, true);
+    let sc = payload.scl || {};
+    renderizarContenidoLibrito(payload.name || '—', payload.dni || '', payload.examiner || '—', sc, true);
   }
 }
+
 
 function cerrarLibritoDigital(){
   document.getElementById('protocolCard').classList.add('hidden');
