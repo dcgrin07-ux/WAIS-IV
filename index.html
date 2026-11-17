@@ -543,14 +543,14 @@ function abrirLibritoDigital(){
     scl: sc
   };
   
-  const dniVal = document.getElementById('dni').value.trim();
-  const shortKey = dniVal ? `wais_${dniVal}` : `wais_${Math.random().toString(36).substring(2, 8)}`;
-  
-  globalCloudReports[shortKey] = payload;
-  localStorage.setItem('waisCloudDB', JSON.stringify(globalCloudReports));
+  // Comprimimos y codificamos todos los datos directo en la URL
+  const jsonString = JSON.stringify(payload);
+  const base64Data = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+      return String.fromCharCode('0x' + p1);
+  }));
 
   const baseUrl = window.location.href.split('?')[0].split('#')[0];
-  const urlFinal = `${baseUrl}?id=${shortKey}`;
+  const urlFinal = `${baseUrl}?data=${base64Data}`;
   
   const urlTextEl = document.getElementById('generatedUrlText');
   if(urlTextEl) urlTextEl.textContent = urlFinal;
@@ -563,6 +563,7 @@ function abrirLibritoDigital(){
   document.getElementById('protocolCard').classList.remove('hidden');
   window.scrollTo({top:0, behavior:'smooth'});
 }
+
 
 function renderizarContenidoLibrito(nombre, dni, exam, sc, esVisorExterno){
   let edadTexto='—';
